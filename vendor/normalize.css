@@ -142,7 +142,7 @@ sup {
    ========================================================================== */
 
 /**
- * Remove the border on images inside links in IE 10.
+ * Remove the border on  inside links in IE 10.
  */
 
 img {
@@ -174,7 +174,8 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -184,7 +185,8 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 

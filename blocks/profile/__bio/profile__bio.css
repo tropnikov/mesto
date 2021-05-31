@@ -1,0 +1,18 @@
+.profile__bio {
+  grid-area: bio;
+  margin: 0;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__bio {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+}

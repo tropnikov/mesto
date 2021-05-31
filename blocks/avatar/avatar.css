@@ -1,0 +1,11 @@
+.avatar {
+  flex-basis: 120px;
+  width: 120px;
+  height: 120px;
+}
+@media screen and (min-width: 1280px) {
+  .avatar {
+    min-width: 120px;
+    min-height: 120px;
+  }
+}
