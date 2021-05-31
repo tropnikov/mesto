@@ -1,5 +1,3 @@
-console.log("Пока работает");
-
 let openPopup = document.querySelector(".popup-open");
 let popup = document.querySelector(".popup");
 let closePopup = popup.querySelector(".popup__close");
