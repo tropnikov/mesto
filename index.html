@@ -36,14 +36,14 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__bio">Исследователь океана</p>
 
-            <button class="profile__edit-button"></button>
+            <button class="profile__edit-button popup-open hover"></button>
           </div>
-          <button class="add-button" name="add-button"></button>
+          <button class="add-button hover" name="add-button"></button>
         </section>
 
         <section class="photos section content__section">
           <ul class="places">
-            <li class="place">
+            <li class="place hover">
               <!-- <div class="place__container"> -->
               <img
                 src="./images/karachaevsk.png"
@@ -57,7 +57,7 @@
               </div>
               <!-- </div> -->
             </li>
-            <li class="place">
+            <li class="place hover">
               <!-- <div class="place__container"> -->
               <img
                 src="./images/2_tiny.jpg"
@@ -72,7 +72,7 @@
               </div>
               <!-- </div> -->
             </li>
-            <li class="place">
+            <li class="place hover">
               <!-- <div class="place__container"> -->
               <img
                 src="./images/3_tiny.jpg"
@@ -87,7 +87,7 @@
               </div>
               <!-- </div> -->
             </li>
-            <li class="place">
+            <li class="place hover">
               <!-- <div class="place__container"> -->
               <img
                 src="./images/2_tiny.jpg"
@@ -100,7 +100,7 @@
               </div>
               <!-- </div> -->
             </li>
-            <li class="place">
+            <li class="place hover">
               <!-- <div class="place__container"> -->
               <img
                 src="./images/3_tiny.jpg"
@@ -113,7 +113,7 @@
               </div>
               <!-- </div> -->
             </li>
-            <li class="place">
+            <li class="place hover">
               <!-- <div class="place__container"> -->
               <img
                 src="./images/1_tiny.jpg"
@@ -129,19 +129,30 @@
           </ul>
         </section>
 
-        <section class="popup popup_opened">
+        <section class="popup">
           <div class="popup__container">
             <button
-              class="popup__close"
+              class="popup__close hover"
               type="button"
               aria-label="Закрыть попап"
             ></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form action="" class="popup__form">
-              <input type="text" class="form__input" />
-              <input type="text" class="form__input" />
+              <input
+                type="text"
+                name="profile-name"
+                class="form__input"
+                value="Жак-Ив Кусто"
+              />
+              <input
+                type="text"
+                name="profile-bio"
+                class="form__input"
+                value="Исследователь океана"
+              />
+
+              <button type="submit" class="popup__save hover">Сохранить</button>
             </form>
-            <button type="submit" class="popup__save">Сохранить</button>
           </div>
         </section>
       </main>

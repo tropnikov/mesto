@@ -44,15 +44,20 @@
   display: flex;
   align-items: center;
   width: 100%;
-  display: flex;
-  align-items: center;
+
   justify-content: flex-start;
-  position: relative;
 }
 
 .avatar {
-  width: 120px;
-  height: 120px;
+  flex-basis: 120px;
+  /* width: 120px; */
+  /* height: 120px; */
+}
+@media screen and (min-width: 1280px) {
+  .avatar {
+    min-width: 120px;
+    min-height: 120px;
+  }
 }
 
 .avatar__image {
@@ -67,7 +72,8 @@
     "name button"
     "bio bio";
   gap: 16px 18px;
-  margin-left: 30px;
+  margin: 0 30px;
+  flex-shrink: 1;
 }
 
 .profile__text {
@@ -77,20 +83,23 @@
   margin: 0;
   padding: 0;
   font-family: "Inter", Helvetica, Arial, sans-serif;
-  font-style: normal;
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__bio {
   grid-area: bio;
   margin: 0;
   font-family: "Inter", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__edit-button {
@@ -105,7 +114,6 @@
   align-self: center;
   border: 1px solid #ffffff;
   box-sizing: border-box;
-  cursor: pointer;
 }
 
 .add-button {
@@ -119,9 +127,16 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: black;
-  position: absolute;
-  right: 0;
-  cursor: pointer;
+  margin-left: auto;
+  /* position: absolute; */
+  /* right: 0; */
+}
+
+@media screen and (min-width: 1280px) {
+  .add-button {
+    min-width: 150px;
+    min-height: 50px;
+  }
 }
 
 .photos {
@@ -145,10 +160,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.place:hover {
-  opacity: 0.8;
 }
 
 .place__container {
@@ -179,11 +190,13 @@
   margin: 0;
   padding: 0;
   font-family: "Inter", Helvetica, Arial, sans-serif;
-  font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
   color: #000000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .place__like {
   border-style: none;
@@ -192,16 +205,23 @@
   background-repeat: no-repeat;
   background-position: center;
   object-fit: cover;
-  background-color: white;
+  background-color: transparent;
+}
+
+.place__like_active {
+  /* fill: black; */
 }
 
 .popup {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popup__container {
@@ -212,12 +232,9 @@
   border-radius: 10px;
   width: 33.6%;
   top: 195px;
-  /* left: calc((100% - 33.6%) / 2); */
   padding: 36px;
   margin: 0 auto;
   box-sizing: border-box;
-  /* margin: 195px auto 0; */
-  /* margin:  */
 }
 
 .popup__close {
@@ -231,8 +248,7 @@
   padding: 0;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: black;
-  cursor: pointer;
+  background-color: transparent;
 }
 
 .popup__title {
@@ -240,7 +256,6 @@
   margin-bottom: 54px;
   padding: 0;
   font-family: "Inter", Helvetica, Arial, sans-serif;
-  font-style: normal;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
@@ -249,21 +264,19 @@
 }
 
 .popup__form {
-  /* margin: 0 auto; */
 }
 
 .form__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  /* opacity: 0.2; */
   width: 100%;
   font-family: "Inter", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
   line-height: 17px;
   margin-bottom: 30px;
   color: #000000;
+  padding: 10px 4px 13px;
+  box-sizing: border-box;
 }
 
 .form__input:last-of-type {
@@ -272,8 +285,6 @@
 
 .popup__save {
   font-family: "Inter", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
   font-size: 18px;
   line-height: 22px;
   text-align: center;
@@ -283,11 +294,13 @@
   height: 50px;
   padding: 0;
   margin-top: 48px;
-  cursor: pointer;
+  width: 100%;
 }
 
 .popup_opened {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .footer {
@@ -295,9 +308,16 @@
 
 .footer__copyright {
   font-family: "Inter", Helvetica, Arial, sans-serif;
-  font-style: normal;
-  font-weight: normal;
   font-size: 18px;
   line-height: 22px;
   color: #545454;
+}
+
+.hover {
+  transition: opacity 0.2s ease;
+}
+
+.hover:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
