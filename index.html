@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <title>Project Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+
+  <body class="page">
+    <div class="page__container">
+      <header class="header page__header">
+        <div class="logo header__logo">
+          <img
+            class="logo__image"
+            src="./images/logo.svg"
+            alt="Логотип Проекта Mesto Russia"
+          />
+        </div>
+      </header>
+
+      <main class="content page__content">
+        <section class="profile section content__section">
+          <div class="avatar">
+            <img
+              class="avatar__image"
+              src="./images/avatar.jpg"
+              alt="Фотография профиля Жак-Ива Кусто"
+            />
+          </div>
+          <div class="profile__info">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__bio">Исследователь океана</p>
+
+            <button class="profile__edit-button"></button>
+          </div>
+          <button class="add-button" name="add-button"></button>
+        </section>
+
+        <section class="photos section content__section">
+          <ul class="places">
+            <li class="place">
+              <!-- <div class="place__container"> -->
+              <img
+                src="./images/karachaevsk.png"
+                alt="Фотография Сентинского храма в Карачаевсе"
+                class="place__photo"
+              />
+              <!-- </div> -->
+              <div class="place__info">
+                <h3 class="place__title">Карачаевск</h3>
+                <button class="place__like"></button>
+              </div>
+              <!-- </div> -->
+            </li>
+            <li class="place">
+              <!-- <div class="place__container"> -->
+              <img
+                src="./images/2_tiny.jpg"
+                alt="Фотография горы Эльбрус"
+                class="place__photo"
+              />
+              <!-- </div> -->
+
+              <div class="place__info">
+                <h3 class="place__title">Гора Эльбрус</h3>
+                <button class="place__like"></button>
+              </div>
+              <!-- </div> -->
+            </li>
+            <li class="place">
+              <!-- <div class="place__container"> -->
+              <img
+                src="./images/3_tiny.jpg"
+                alt="Фотография горного хребта Домбай"
+                class="place__photo"
+              />
+              <!-- </div> -->
+
+              <div class="place__info">
+                <h3 class="place__title">Домбай</h3>
+                <button class="place__like"></button>
+              </div>
+              <!-- </div> -->
+            </li>
+            <li class="place">
+              <!-- <div class="place__container"> -->
+              <img
+                src="./images/2_tiny.jpg"
+                alt="Фотография горы Эльбрус"
+                class="place__photo"
+              />
+              <div class="place__info">
+                <h3 class="place__title">Гора Эльбрус</h3>
+                <button class="place__like"></button>
+              </div>
+              <!-- </div> -->
+            </li>
+            <li class="place">
+              <!-- <div class="place__container"> -->
+              <img
+                src="./images/3_tiny.jpg"
+                alt="Фотография горного хребта Домбай"
+                class="place__photo"
+              />
+              <div class="place__info">
+                <h3 class="place__title">Домбай</h3>
+                <button class="place__like"></button>
+              </div>
+              <!-- </div> -->
+            </li>
+            <li class="place">
+              <!-- <div class="place__container"> -->
+              <img
+                src="./images/1_tiny.jpg"
+                alt="Фотография Сентинского храма в Карачаевске"
+                class="place__photo"
+              />
+              <div class="place__info">
+                <h3 class="place__title">Карачаевск</h3>
+                <button class="place__like"></button>
+              </div>
+              <!-- </div> -->
+            </li>
+          </ul>
+        </section>
+
+        <section class="popup popup_opened">
+          <button
+            class="popup__close"
+            type="button"
+            aria-label="Закрыть попап"
+          ></button>
+          <div class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form action="" class="popup__form">
+              <input type="text" class="form__input" />
+              <input type="text" class="form__input" />
+            </form>
+            <button type="submit" class="popup__save">Сохранить</button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer section page__footer">
+        <p class="footer__copyright">&copy; 2021 Максим Тропников</p>
+      </footer>
+    </div>
+    <script src="./scripts/main.js"></script>
+  </body>
+</html>
