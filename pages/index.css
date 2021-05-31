@@ -17,12 +17,42 @@
   padding: 45px 0 60px;
 }
 
+@media screen and (max-width: 1024px) {
+  .page__container {
+    width: calc(100% - 160px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page__container {
+    width: 100%;
+    padding: 28px 0 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page__content {
+    padding: 0 19px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page__footer {
+    padding: 0 19px 36px;
+  }
+}
 .header {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   min-height: 74px;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding-left: 27px;
+  }
 }
 
 .logo {
@@ -48,10 +78,16 @@
   justify-content: flex-start;
 }
 
+@media screen and (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+  }
+}
+
 .avatar {
   flex-basis: 120px;
-  /* width: 120px; */
-  /* height: 120px; */
+  width: 120px;
+  height: 120px;
 }
 @media screen and (min-width: 1280px) {
   .avatar {
@@ -76,11 +112,26 @@
   flex-shrink: 1;
 }
 
+@media screen and (max-width: 1024px) {
+  .profile__info {
+    margin: 0 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile__info {
+    gap: 14px 10px;
+    margin: 26px auto 36px;
+    /* grid-template-areas: */
+    /* "name name" */
+    /* "bio bio"; */
+  }
+}
 .profile__text {
 }
 .profile__name {
   grid-area: name;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   font-family: "Inter", Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -89,6 +140,15 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__name {
+    margin-left: 24px;
+    /* text-align: center; */
+    font-size: 27px;
+    line-height: 33px;
+  }
 }
 
 .profile__bio {
@@ -100,6 +160,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__bio {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
 }
 
 .profile__edit-button {
@@ -116,6 +184,12 @@
   box-sizing: border-box;
 }
 
+@media screen and (max-width: 768px) {
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+}
 .add-button {
   width: 150px;
   height: 50px;
@@ -128,10 +202,17 @@
   background-repeat: no-repeat;
   background-color: black;
   margin-left: auto;
+  flex-shrink: 3;
   /* position: absolute; */
   /* right: 0; */
 }
 
+@media screen and (max-width: 768px) {
+  .add-button {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
 @media screen and (min-width: 1280px) {
   .add-button {
     min-width: 150px;
@@ -149,6 +230,25 @@
   grid-template: repeat(2, 1fr) / repeat(3, 1fr);
   gap: 20px 17px;
 }
+
+@media screen and (max-width: 1024px) {
+  .places {
+    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    padding: 36px 0 48px;
+    row-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .places {
+    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-template-columns: 1fr;
+    padding: 36px 0 48px;
+    row-gap: 20px;
+  }
+}
+
 .place {
   margin: 0;
   padding: 0;
@@ -325,6 +425,12 @@
   color: #545454;
 }
 
+@media screen and (max-width: 768px) {
+  .footer__copyright {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
 .hover {
   transition: opacity 0.2s ease;
 }
