@@ -1,13 +1,21 @@
-let openPopup = document.querySelector(".popup-open");
-let popup = document.querySelector(".popup");
-let closePopup = popup.querySelector(".popup__close");
+let openPopupButton = document.querySelector('.button_type_edit');
+let popup = document.querySelector('.popup');
+let closePopupButton = popup.querySelector('.button_type_close');
+let profileName = document.querySelector('.profile__name');
+let profileBio = document.querySelector('.profile__bio');
 
-openPopup.addEventListener("click", togglePopupClass);
+let formElement = document.querySelector('.popup__form');
+let nameInput = formElement.querySelector("[name='profile-name']");
+let jobInput = formElement.querySelector("[name='profile-bio']");
 
-closePopup.addEventListener("click", togglePopupClass);
+function openPopup() {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileBio.textContent;
+  popup.classList.add('popup_opened');
+}
 
-function togglePopupClass() {
-  popup.classList.toggle("popup_opened");
+function closePopup() {
+  popup.classList.remove('popup_opened');
 }
 
 // popup.addEventListener("click", function (event) {
@@ -16,18 +24,17 @@ function togglePopupClass() {
 //   }
 // });
 
-let formElement = document.querySelector(".popup__form"); // Воспользуйтесь методом querySelector()
-let nameInput = formElement.querySelector("[name='profile-name']"); // Воспользуйтесь инструментом .querySelector()
-let jobInput = formElement.querySelector("[name='profile-bio']"); // Воспользуйтесь инструментом .querySelector()
-
 function formSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  let nameInputValue = nameInput.value;
-  let jobInputValue = jobInput.value;
-  let profileName = document.querySelector(".profile__name");
-  let profileBio = document.querySelector(".profile__bio");
-  profileName.textContent = nameInputValue;
-  profileBio.textContent = jobInputValue;
+  // let nameInputValue = nameInput.value;
+  // let jobInputValue = jobInput.value;
+  let profileName = document.querySelector('.profile__name');
+  let profileBio = document.querySelector('.profile__bio');
+  profileName.textContent = nameInput.value;
+  profileBio.textContent = jobInput.value;
+  closePopup();
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
+openPopupButton.addEventListener('click', openPopup);
+closePopupButton.addEventListener('click', closePopup);
+formElement.addEventListener('submit', formSubmitHandler);

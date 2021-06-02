@@ -7,8 +7,14 @@
   line-height: 17px;
   margin-bottom: 30px;
   color: #000000;
-  padding: 10px 4px 13px;
+  padding: 0 0 8px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+  .form__input {
+    padding: 0 0 8px;
+  }
 }
 
 .form__input:last-of-type {

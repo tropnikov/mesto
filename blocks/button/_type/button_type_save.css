@@ -1,9 +1,10 @@
-.popup__save {
+.button_type_save {
   font-family: "Inter", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 22px;
   text-align: center;
   background: #000000;
+  border: none;
   border-radius: 2px;
   color: #ffffff;
   height: 50px;
@@ -13,15 +14,15 @@
 }
 
 @media screen and (max-width: 768px) {
-  .popup__save {
-    margin-top: 48px;
+  .button_type_save {
+    margin-top: 45px;
     height: 46px;
     font-size: 14px;
     line-height: 17px;
   }
 }
 
-.popup__save:hover {
+.button_type_save:hover {
   opacity: 0.8;
   cursor: pointer;
 }

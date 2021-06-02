@@ -17,9 +17,6 @@
 
 @media screen and (max-width: 568px) {
   .places {
-    grid-template-rows: repeat(auto-fit, 1fr);
     grid-template-columns: 1fr;
-    padding: 36px 0 48px;
-    row-gap: 20px;
   }
 }
