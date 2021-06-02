@@ -13,11 +13,6 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 1048px) {
-  .button_type_edit {
-  }
-}
-
 @media screen and (max-width: 768px) {
   .button_type_edit {
     right: -28px;
