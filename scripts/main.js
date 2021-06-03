@@ -26,9 +26,6 @@ function closePopup() {
 
 function formSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // let nameInputValue = nameInput.value;
-  // let jobInputValue = jobInput.value;
-  let profileName = document.querySelector('.profile__name');
   let profileBio = document.querySelector('.profile__bio');
   profileName.textContent = nameInput.value;
   profileBio.textContent = jobInput.value;

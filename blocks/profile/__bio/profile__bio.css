@@ -1,5 +1,6 @@
 .profile__bio {
   max-width: 100%;
+  width: 100%;
   grid-area: bio;
   margin: 0;
   font-family: "Inter", Helvetica, Arial, sans-serif;

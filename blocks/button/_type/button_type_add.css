@@ -11,6 +11,7 @@
   background-color: black;
   margin-left: auto;
   flex-shrink: 0;
+  justify-self: self-end;
 }
 
 @media screen and (max-width: 768px) {

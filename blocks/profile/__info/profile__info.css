@@ -1,24 +1,25 @@
 .profile__info {
-  position: relative;
-  max-width: calc(100% - 38px);
   display: grid;
   grid-template-areas:
-    "name"
-    "bio";
-  gap: 16px;
+    "name button"
+    "bio bio";
+  gap: 16px 18px;
   margin: 0 30px;
-  grid-template-columns: auto;
+  grid-template-rows: auto;
 }
 
 @media screen and (max-width: 1024px) {
   .profile__info {
-    margin: 0 10px;
+    margin: 0 15px;
   }
 }
 
 @media screen and (max-width: 768px) {
   .profile__info {
-    gap: 14px;
+    max-width: 100%;
+    width: 100%;
+    justify-content: center;
+    gap: 14px 10px;
     margin: 26px auto 36px;
   }
 }

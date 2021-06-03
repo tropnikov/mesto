@@ -4,6 +4,7 @@
   flex-direction: column;
   background-color: #fff;
   border-radius: 10px;
+  max-width: 430px;
   width: 33.6%;
   padding: 34px 36px 37px;
   margin: 0 auto;

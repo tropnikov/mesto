@@ -1,7 +1,4 @@
 .button_type_edit {
-  position: absolute;
-  right: -40px;
-  top: 16px;
   width: 24px;
   height: 24px;
   background-color: black;
@@ -11,12 +8,14 @@
   background-repeat: no-repeat;
   border: 1px solid #ffffff;
   box-sizing: border-box;
+  justify-self: start;
+  align-self: center;
+  justify-items: start;
+  grid-area: button;
 }
 
 @media screen and (max-width: 768px) {
   .button_type_edit {
-    right: -28px;
-    top: 10px;
     width: 18px;
     height: 18px;
   }
