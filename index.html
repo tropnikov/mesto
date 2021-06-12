@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
 
-  <templst class="page">
+  <body class="page">
     <div class="page__container">
       <header class="header page__header">
         <img
@@ -56,10 +56,7 @@
               />
               <div class="place__info">
                 <h3 class="place__title">Карачаевск</h3>
-                <button
-                  class="place__like place__like_active"
-                  type="button"
-                ></button>
+                <button class="place__like" type="button"></button>
               </div>
             </li>
 
@@ -131,16 +128,25 @@
       </footer>
     </div>
 
-    <div class="popup">
+    <div class="popup popup__profile-edit">
       <div class="popup__container">
         <button
-          class="popup__close button button_type_close hover"
+          class="
+            popup__close
+            button button_type_close
+            popup__profile-edit_close-button
+            hover
+          "
           type="button"
           aria-label="Закрыть попап"
         ></button>
         <h2 class="popup__title">Редактировать профиль</h2>
 
-        <form action="#" class="form popup__form" name="profile-edit-form">
+        <form
+          action="#"
+          class="form popup__form popup__profile-edit_form"
+          name="profile-edit-form"
+        >
           <input type="text" name="profile-name" class="form__input" />
           <input type="text" name="profile-bio" class="form__input" />
           <button type="submit" class="popup__save button button_type_save">
@@ -150,21 +156,56 @@
       </div>
     </div>
 
-    <template class="card__template">
-    <li class="place">
-      <img
-        src="./images/1_tiny.jpg"
-        alt="Фотография Сентинского храма в Карачаевске"
-        class="place__photo"
-      />
-      <div class="place__info">
-        <h3 class="place__title">Карачаевск</h3>
+    <div class="popup popup__place-add">
+      <div class="popup__container">
         <button
-          class="place__like place__like_active"
+          class="
+            popup__close
+            button button_type_close
+            popup__place-add_close-button
+            hover
+          "
           type="button"
+          aria-label="Закрыть попап"
         ></button>
+        <h2 class="popup__title">Новое место</h2>
+
+        <form
+          action="#"
+          class="form popup__form popup__place-add_form"
+          name="place-add-form"
+        >
+          <input
+            type="text"
+            name="place-name"
+            class="form__input"
+            placeholder="Название"
+          />
+          <input
+            type="text"
+            name="place-link"
+            class="form__input"
+            placeholder="Ссылка на картинку"
+          />
+          <button type="submit" class="popup__save button button_type_save">
+            Создать
+          </button>
+        </form>
       </div>
-    </li>
+    </div>
+
+    <template class="card__template">
+      <li class="place">
+        <img
+          src="./images/1_tiny.jpg"
+          alt="Фотография Сентинского храма в Карачаевске"
+          class="place__photo"
+        />
+        <div class="place__info">
+          <h3 class="place__title">Карачаевск</h3>
+          <button class="place__like" type="button"></button>
+        </div>
+      </li>
     </template>
 
     <script src="./scripts/main.js"></script>
