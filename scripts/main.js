@@ -41,7 +41,7 @@ const placeNameInput = addPlaceFormElement.querySelector("[name='place-name']");
 const placeLinkInput = addPlaceFormElement.querySelector("[name='place-link']");
 
 // лайк карточки
-const likeButton = document.querySelector('.place__like');
+// const likeButton = document.querySelector('.place__like');
 
 // попап редактирования профиля
 const editInfoButton = document.querySelector('.button_type_edit');
@@ -68,6 +68,7 @@ function renderCard(card) {
   cardElement.querySelector('.place__photo').src = card.link;
   cardElement.querySelector('.place__photo').alt = card.name;
   cardElement.querySelector('.place__title').innerText = card.name;
+  setEventListeners(cardElement);
   cardsList.prepend(cardElement);
   //  cardsList.insertAdjacentHTML(
   //   'afterbegin',
@@ -92,7 +93,15 @@ function renderCard(card) {
 
 renderInitialCards();
 
-function handleCardSubmit() {}
+function handleDelete(evt) {
+  evt.target.closest('.place').remove();
+}
+
+function setEventListeners(element) {
+  element
+    .querySelector('.place__delete')
+    .addEventListener('click', handleDelete);
+}
 
 // открытие попапа добавления карточки с фотографией
 function openAddPlacePopup() {
@@ -115,11 +124,11 @@ function addPlaceFormSubmitHandler(evt) {
   closeAddPlacePopup();
 }
 
-function likeCard(evt) {
-  console.log(evt);
-  likeButton.classList.toggle('place__like_active');
-  // likeButton.classList.add('place__like_active');
-}
+// function likeCard(evt) {
+//   console.log(evt);
+//   likeButton.classList.toggle('place__like_active');
+//   // likeButton.classList.add('place__like_active');
+// }
 
 // открытие попапа редактирования профиля
 function openEditInfoPopup() {
@@ -146,7 +155,7 @@ function editInfoFormSubmitHandler(evt) {
   closeEditInfoPopup();
 }
 
-likeButton.addEventListener('click', likeCard);
+// deleteCardButton.addEventListener('click', deleteCard);
 
 addPlaceButton.addEventListener('click', openAddPlacePopup);
 addPlaceButtonClose.addEventListener('click', closeAddPlacePopup);
