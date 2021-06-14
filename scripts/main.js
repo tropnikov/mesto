@@ -170,7 +170,8 @@ function openEditInfoPopup() {
 }
 
 // закрытие попапа редактирования профиля
-function closeEditInfoPopup() {
+function closeEditInfoPopup(evt) {
+  console.log(evt);
   editInfoPopup.classList.remove('popup_opened');
 }
 
