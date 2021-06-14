@@ -1,0 +1,19 @@
+.popup__photo-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  /* border-radius: 10px; */
+  /* max-width: 430px; */
+  /* width: 33.6%; */
+  /* padding: 34px 36px 37px; */
+  margin: 0 auto;
+  /* max-width: 75vw; */
+  /* max-height: 75vh; */
+  font-size: 0;
+  box-sizing: border-box;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

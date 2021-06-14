@@ -1,3 +1,16 @@
+// попап редактирования профиля
+const editInfoButton = document.querySelector('.button_type_edit');
+const editInfoPopup = document.querySelector('.popup__profile-edit');
+const editInfoButtonClose = editInfoPopup.querySelector(
+  '.popup__profile-edit_close-button'
+);
+
+const profileName = document.querySelector('.profile__name');
+const profileBio = document.querySelector('.profile__bio');
+const editInfoFormElement = document.querySelector('.popup__profile-edit_form');
+const nameInput = editInfoFormElement.querySelector("[name='profile-name']");
+const jobInput = editInfoFormElement.querySelector("[name='profile-bio']");
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -40,21 +53,14 @@ const addPlaceFormElement = document.querySelector('.popup__place-add_form');
 const placeNameInput = addPlaceFormElement.querySelector("[name='place-name']");
 const placeLinkInput = addPlaceFormElement.querySelector("[name='place-link']");
 
-// лайк карточки
-// const likeButton = document.querySelector('.place__like');
+const popupPlacePhotoFull = document.querySelector('.popup__place-photo');
 
-// попап редактирования профиля
-const editInfoButton = document.querySelector('.button_type_edit');
-const editInfoPopup = document.querySelector('.popup__profile-edit');
-const editInfoButtonClose = editInfoPopup.querySelector(
-  '.popup__profile-edit_close-button'
+const popupPlacePhotoFullButtonClose = document.querySelector(
+  '.popup__place-photo_close-button'
 );
 
-const profileName = document.querySelector('.profile__name');
-const profileBio = document.querySelector('.profile__bio');
-const editInfoFormElement = document.querySelector('.popup__profile-edit_form');
-const nameInput = editInfoFormElement.querySelector("[name='profile-name']");
-const jobInput = editInfoFormElement.querySelector("[name='profile-bio']");
+// лайк карточки
+// const likeButton = document.querySelector('.place__like');
 
 // функция отрисовки начальных карточек
 function renderInitialCards() {
@@ -97,10 +103,36 @@ function handleDelete(evt) {
   evt.target.closest('.place').remove();
 }
 
+function handleLike(evt) {
+  //   console.log(evt);
+  evt.target.classList.toggle('place__like_active');
+  //   // likeButton.classList.add('place__like_active');
+}
+
+function handleOpenFull(evt) {
+  // console.log(evt.target.parentNode);
+  console.log(evt.target);
+  popupPlacePhotoFull.classList.add('popup_opened');
+  popupPlacePhotoFull.querySelector('.popup__place-photo_image').src =
+    evt.target.src;
+  popupPlacePhotoFull.querySelector('.popup__place-photo_caption').textContent =
+    evt.target.parentNode.querySelector('.place__title').textContent;
+  console.log(evt.target.parentNode.querySelector('.place__title').textContent);
+  // evt.target.classList.toggle('popup_opened');
+}
+
+function closePhotoFullPopup() {
+  popupPlacePhotoFull.classList.remove('popup_opened');
+}
+
 function setEventListeners(element) {
   element
     .querySelector('.place__delete')
     .addEventListener('click', handleDelete);
+  element.querySelector('.place__like').addEventListener('click', handleLike);
+  element
+    .querySelector('.place__photo')
+    .addEventListener('click', handleOpenFull);
 }
 
 // открытие попапа добавления карточки с фотографией
@@ -124,7 +156,7 @@ function addPlaceFormSubmitHandler(evt) {
   closeAddPlacePopup();
 }
 
-// function likeCard(evt) {
+// function handleLike(evt) {
 //   console.log(evt);
 //   likeButton.classList.toggle('place__like_active');
 //   // likeButton.classList.add('place__like_active');
@@ -156,6 +188,8 @@ function editInfoFormSubmitHandler(evt) {
 }
 
 // deleteCardButton.addEventListener('click', deleteCard);
+
+popupPlacePhotoFullButtonClose.addEventListener('click', closePhotoFullPopup);
 
 addPlaceButton.addEventListener('click', openAddPlacePopup);
 addPlaceButtonClose.addEventListener('click', closeAddPlacePopup);

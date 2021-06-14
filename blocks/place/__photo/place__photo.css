@@ -4,4 +4,5 @@
   max-height: 282px;
   object-fit: cover;
   /* object-position: 0%; */
+  cursor: pointer;
 }
