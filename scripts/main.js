@@ -1,13 +1,13 @@
 // попап редактирования профиля
 const editInfoButton = document.querySelector('.button_type_edit');
-const editInfoPopup = document.querySelector('.popup__profile-edit');
+const editInfoPopup = document.querySelector('.profile-edit');
 const editInfoButtonClose = editInfoPopup.querySelector(
-  '.popup__profile-edit_close-button'
+  '.profile-edit__close-button'
 );
 
 const profileName = document.querySelector('.profile__name');
 const profileBio = document.querySelector('.profile__bio');
-const editInfoFormElement = document.querySelector('.popup__profile-edit_form');
+const editInfoFormElement = document.querySelector('.profile-edit__form');
 const nameInput = editInfoFormElement.querySelector("[name='profile-name']");
 const jobInput = editInfoFormElement.querySelector("[name='profile-bio']");
 
@@ -45,18 +45,16 @@ const cardTemplate = document.querySelector('.card__template').content;
 
 // попап добавления нового места
 const addPlaceButton = document.querySelector('.button_type_add');
-const addPlacePopup = document.querySelector('.popup__place-add');
-const addPlaceButtonClose = document.querySelector(
-  '.popup__place-add_close-button'
-);
-const addPlaceFormElement = document.querySelector('.popup__place-add_form');
+const addPlacePopup = document.querySelector('.place-add');
+const addPlaceButtonClose = document.querySelector('.place-add__close-button');
+const addPlaceFormElement = document.querySelector('.place-add__form');
 const placeNameInput = addPlaceFormElement.querySelector("[name='place-name']");
 const placeLinkInput = addPlaceFormElement.querySelector("[name='place-link']");
 
-const popupPlacePhotoFull = document.querySelector('.popup__place-photo');
+const popupPlacePhotoFull = document.querySelector('.place-full-photo');
 
 const popupPlacePhotoFullButtonClose = document.querySelector(
-  '.popup__place-photo_close-button'
+  '.place-full-photo__close-button'
 );
 
 // функция отрисовки начальных карточек
@@ -83,9 +81,9 @@ function handleLike(evt) {
 
 function handleOpenFull(evt) {
   popupPlacePhotoFull.classList.add('popup_opened');
-  popupPlacePhotoFull.querySelector('.popup__place-photo_image').src =
+  popupPlacePhotoFull.querySelector('.place-full-photo__image').src =
     evt.target.src;
-  popupPlacePhotoFull.querySelector('.popup__place-photo_caption').textContent =
+  popupPlacePhotoFull.querySelector('.place-full-photo__caption').textContent =
     evt.target.parentNode.querySelector('.place__title').textContent;
 }
 
