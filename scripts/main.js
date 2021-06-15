@@ -11,37 +11,10 @@ const editInfoFormElement = document.querySelector('.profile-edit__form');
 const nameInput = editInfoFormElement.querySelector("[name='profile-name']");
 const jobInput = editInfoFormElement.querySelector("[name='profile-bio']");
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
-
 // список с карточками
 const cardsList = document.querySelector('.places');
 // шаблон карточки
-const cardTemplate = document.querySelector('.card__template').content;
+const cardTemplate = document.querySelector('.card-template').content;
 
 // попап добавления нового места
 const addPlaceButton = document.querySelector('.button_type_add');
@@ -51,25 +24,46 @@ const addPlaceFormElement = document.querySelector('.place-add__form');
 const placeNameInput = addPlaceFormElement.querySelector("[name='place-name']");
 const placeLinkInput = addPlaceFormElement.querySelector("[name='place-link']");
 
+// попап просмотра фотографии места
 const popupPlacePhotoFull = document.querySelector('.place-full-photo');
-
+const fullPhotoImage = popupPlacePhotoFull.querySelector(
+  '.place-full-photo__image'
+);
+const fullPhotoCaption = popupPlacePhotoFull.querySelector(
+  '.place-full-photo__caption'
+);
 const popupPlacePhotoFullButtonClose = document.querySelector(
   '.place-full-photo__close-button'
 );
 
 // функция отрисовки начальных карточек
 function renderInitialCards() {
-  initialCards.forEach((card) => renderCard(card));
+  initialCards.forEach((card) => addCard(card));
 }
 
-function renderCard(card) {
+function createCard(card) {
   const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.place__photo').src = card.link;
-  cardElement.querySelector('.place__photo').alt = card.name;
+  const placePhoto = cardElement.querySelector('.place__photo');
+  placePhoto.src = card.link;
+  placePhoto.alt = card.name;
   cardElement.querySelector('.place__title').innerText = card.name;
   setEventListeners(cardElement);
-  cardsList.prepend(cardElement);
+  return cardElement;
 }
+
+function addCard(card) {
+  cardsList.prepend(createCard(card));
+}
+
+// function renderCard(card) {
+//   const cardElement = cardTemplate.cloneNode(true);
+//   const placePhoto = cardElement.querySelector('.place__photo');
+//   placePhoto.src = card.link;
+//   placePhoto.alt = card.name;
+//   cardElement.querySelector('.place__title').innerText = card.name;
+//   setEventListeners(cardElement);
+//   cardsList.prepend(cardElement);
+// }
 
 function handleDelete(evt) {
   evt.target.closest('.place').remove();
@@ -81,10 +75,22 @@ function handleLike(evt) {
 
 function handleOpenFull(evt) {
   popupPlacePhotoFull.classList.add('popup_opened');
-  popupPlacePhotoFull.querySelector('.place-full-photo__image').src =
-    evt.target.src;
-  popupPlacePhotoFull.querySelector('.place-full-photo__caption').textContent =
+  fullPhotoImage.src = evt.target.src;
+  fullPhotoImage.alt = evt.target.alt;
+  fullPhotoCaption.textContent =
     evt.target.parentNode.querySelector('.place__title').textContent;
+}
+
+function openPopup(popup) {
+  if (popup === editInfoPopup) {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileBio.textContent;
+  }
+  popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 function closePhotoFullPopup() {
@@ -104,8 +110,6 @@ function setEventListeners(element) {
 // открытие попапа добавления карточки с фотографией
 function openAddPlacePopup() {
   addPlacePopup.classList.add('popup_opened');
-  placeNameInput.value = '';
-  placeLinkInput.value = '';
 }
 
 // закрытие попапа добавления нового места
@@ -113,26 +117,26 @@ function closeAddPlacePopup() {
   addPlacePopup.classList.remove('popup_opened');
 }
 
-function addPlaceFormSubmitHandler(evt) {
+function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  renderCard({ name: placeNameInput.value, link: placeLinkInput.value });
+  addCard({ name: placeNameInput.value, link: placeLinkInput.value });
+  addPlaceFormElement.reset();
   closeAddPlacePopup();
 }
 
-// открытие попапа редактирования профиля
-function openEditInfoPopup() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileBio.textContent;
-  editInfoPopup.classList.add('popup_opened');
-}
+// // открытие попапа редактирования профиля
+// function openEditInfoPopup() {
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileBio.textContent;
+//   editInfoPopup.classList.add('popup_opened');
+// }
 
-// закрытие попапа редактирования профиля
-function closeEditInfoPopup(evt) {
-  console.log(evt);
-  editInfoPopup.classList.remove('popup_opened');
-}
+// // закрытие попапа редактирования профиля
+// function closeEditInfoPopup(evt) {
+//   editInfoPopup.classList.remove('popup_opened');
+// }
 
-function editInfoFormSubmitHandler(evt) {
+function handleEditInfoFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   profileName.textContent = nameInput.value;
   profileBio.textContent = jobInput.value;
@@ -143,10 +147,10 @@ renderInitialCards();
 
 popupPlacePhotoFullButtonClose.addEventListener('click', closePhotoFullPopup);
 
-addPlaceButton.addEventListener('click', openAddPlacePopup);
-addPlaceButtonClose.addEventListener('click', closeAddPlacePopup);
-addPlaceFormElement.addEventListener('submit', addPlaceFormSubmitHandler);
+addPlaceButton.addEventListener('click', () => openPopup(addPlacePopup));
+addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
+addPlaceFormElement.addEventListener('submit', handleAddPlaceFormSubmit);
 
-editInfoButton.addEventListener('click', openEditInfoPopup);
-editInfoButtonClose.addEventListener('click', closeEditInfoPopup);
-editInfoFormElement.addEventListener('submit', editInfoFormSubmitHandler);
+editInfoButton.addEventListener('click', () => openPopup(editInfoPopup));
+editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
+editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);

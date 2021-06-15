@@ -75,8 +75,20 @@
           class="form popup__form profile-edit__form"
           name="profile-edit-form"
         >
-          <input type="text" name="profile-name" class="form__input" />
-          <input type="text" name="profile-bio" class="form__input" />
+          <input
+            type="text"
+            name="profile-name"
+            class="form__input"
+            placeholder="Имя"
+            required
+          />
+          <input
+            type="text"
+            name="profile-bio"
+            class="form__input"
+            placeholder="Краткое био"
+            required
+          />
           <button type="submit" class="popup__save button button_type_save">
             Сохранить
           </button>
@@ -108,12 +120,14 @@
             name="place-name"
             class="form__input"
             placeholder="Название"
+            required
           />
           <input
-            type="text"
+            type="url"
             name="place-link"
             class="form__input"
             placeholder="Ссылка на картинку"
+            required
           />
           <button type="submit" class="popup__save button button_type_save">
             Создать
@@ -140,7 +154,7 @@
       </div>
     </div>
 
-    <template class="card__template">
+    <template class="card-template">
       <li class="place">
         <img
           src="./images/1_tiny.jpg"
@@ -155,6 +169,7 @@
       </li>
     </template>
 
+    <script src="./scripts/initial-сards.js"></script>
     <script src="./scripts/main.js"></script>
   </body>
 </html>
