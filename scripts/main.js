@@ -55,32 +55,6 @@ function addCard(card) {
   cardsList.prepend(createCard(card));
 }
 
-// function renderCard(card) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   const placePhoto = cardElement.querySelector('.place__photo');
-//   placePhoto.src = card.link;
-//   placePhoto.alt = card.name;
-//   cardElement.querySelector('.place__title').innerText = card.name;
-//   setEventListeners(cardElement);
-//   cardsList.prepend(cardElement);
-// }
-
-function handleDelete(evt) {
-  evt.target.closest('.place').remove();
-}
-
-function handleLike(evt) {
-  evt.target.classList.toggle('place__like_active');
-}
-
-function handleOpenFull(evt) {
-  popupPlacePhotoFull.classList.add('popup_opened');
-  fullPhotoImage.src = evt.target.src;
-  fullPhotoImage.alt = evt.target.alt;
-  fullPhotoCaption.textContent =
-    evt.target.parentNode.querySelector('.place__title').textContent;
-}
-
 function openPopup(popup) {
   if (popup === editInfoPopup) {
     nameInput.value = profileName.textContent;
@@ -93,59 +67,49 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function closePhotoFullPopup() {
-  popupPlacePhotoFull.classList.remove('popup_opened');
+function handleDelete(evt) {
+  evt.target.closest('.place').remove();
+}
+
+function handleLike(evt) {
+  evt.target.classList.toggle('place__like_active');
+}
+
+function handleOpenFull(element) {
+  openPopup(popupPlacePhotoFull);
+  fullPhotoImage.src = element.src;
+  fullPhotoImage.alt = element.alt;
+  fullPhotoCaption.textContent = element.alt;
 }
 
 function setEventListeners(element) {
+  const placePhoto = element.querySelector('.place__photo');
   element
     .querySelector('.place__delete')
     .addEventListener('click', handleDelete);
   element.querySelector('.place__like').addEventListener('click', handleLike);
-  element
-    .querySelector('.place__photo')
-    .addEventListener('click', handleOpenFull);
-}
-
-// открытие попапа добавления карточки с фотографией
-function openAddPlacePopup() {
-  addPlacePopup.classList.add('popup_opened');
-}
-
-// закрытие попапа добавления нового места
-function closeAddPlacePopup() {
-  addPlacePopup.classList.remove('popup_opened');
+  placePhoto.addEventListener('click', () => handleOpenFull(placePhoto));
 }
 
 function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   addCard({ name: placeNameInput.value, link: placeLinkInput.value });
   addPlaceFormElement.reset();
-  closeAddPlacePopup();
+  closePopup(addPlacePopup);
 }
-
-// // открытие попапа редактирования профиля
-// function openEditInfoPopup() {
-//   nameInput.value = profileName.textContent;
-//   jobInput.value = profileBio.textContent;
-//   editInfoPopup.classList.add('popup_opened');
-// }
-
-// // закрытие попапа редактирования профиля
-// function closeEditInfoPopup(evt) {
-//   editInfoPopup.classList.remove('popup_opened');
-// }
 
 function handleEditInfoFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   profileName.textContent = nameInput.value;
   profileBio.textContent = jobInput.value;
-  closeEditInfoPopup();
+  closePopup(editInfoPopup);
 }
 
 renderInitialCards();
 
-popupPlacePhotoFullButtonClose.addEventListener('click', closePhotoFullPopup);
+popupPlacePhotoFullButtonClose.addEventListener('click', () =>
+  closePopup(popupPlacePhotoFull)
+);
 
 addPlaceButton.addEventListener('click', () => openPopup(addPlacePopup));
 addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
