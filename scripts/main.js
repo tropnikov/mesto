@@ -56,10 +56,6 @@ function addCard(card) {
 }
 
 function openPopup(popup) {
-  if (popup === editInfoPopup) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileBio.textContent;
-  }
   popup.classList.add('popup_opened');
 }
 
@@ -115,6 +111,10 @@ addPlaceButton.addEventListener('click', () => openPopup(addPlacePopup));
 addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
 addPlaceFormElement.addEventListener('submit', handleAddPlaceFormSubmit);
 
-editInfoButton.addEventListener('click', () => openPopup(editInfoPopup));
+editInfoButton.addEventListener('click', () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileBio.textContent;
+  openPopup(editInfoPopup);
+});
 editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
 editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);
