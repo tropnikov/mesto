@@ -56,6 +56,7 @@
       </footer>
     </div>
 
+    <!-- попап редактирования профиля -->
     <div class="popup profile-edit">
       <div class="popup__container">
         <button
@@ -74,28 +75,41 @@
           action="#"
           class="form popup__form profile-edit__form"
           name="profile-edit-form"
+          novalidate
         >
           <input
+            id="profile-name-input"
             type="text"
             name="profile-name"
             class="form__input"
             placeholder="Имя"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="profile-name-input-error form__input-error"></span>
           <input
+            id="profile-bio-input"
             type="text"
             name="profile-bio"
             class="form__input"
             placeholder="Краткое био"
+            minlength="2"
+            maxlength="200"
             required
           />
-          <button type="submit" class="popup__save button button_type_save">
+          <span class="profile-bio-input-error form__input-error"></span>
+          <button
+            type="submit"
+            class="popup__save button form__submit button_type_save"
+          >
             Сохранить
           </button>
         </form>
       </div>
     </div>
 
+    <!-- попап добавления места -->
     <div class="popup place-add">
       <div class="popup__container">
         <button
@@ -114,28 +128,40 @@
           action="#"
           class="form popup__form place-add__form"
           name="place-add-form"
+          novalidate
         >
           <input
+            id="place-name-input"
             type="text"
             name="place-name"
             class="form__input"
             placeholder="Название"
+            minlength="2"
+            maxlength="30"
             required
           />
+          <span class="place-name-input-error form__input-error"></span>
           <input
+            id="place-link-input"
             type="url"
             name="place-link"
             class="form__input"
             placeholder="Ссылка на картинку"
             required
           />
-          <button type="submit" class="popup__save button button_type_save">
+          <span class="place-link-input-error form__input-error"></span>
+          <button
+            type="submit"
+            class="popup__save button form__submit button_type_save"
+            disabled
+          >
             Создать
           </button>
         </form>
       </div>
     </div>
 
+    <!-- попап просмотра фотографии -->
     <div class="popup popup_photo place-full-photo">
       <div class="popup__photo-container">
         <button
@@ -169,6 +195,7 @@
       </li>
     </template>
 
+    <script src="./scripts/validation.js"></script>
     <script src="./scripts/initial-сards.js"></script>
     <script src="./scripts/main.js"></script>
   </body>

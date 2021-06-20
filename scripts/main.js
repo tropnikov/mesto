@@ -55,12 +55,22 @@ function addCard(card) {
   cardsList.prepend(createCard(card));
 }
 
+function handleCloseByEscape(evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  // debugger;
+  document.addEventListener('keydown', handleCloseByEscape);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleCloseByEscape);
 }
 
 function handleDelete(evt) {
@@ -92,6 +102,12 @@ function handleAddPlaceFormSubmit(evt) {
   addCard({ name: placeNameInput.value, link: placeLinkInput.value });
   addPlaceFormElement.reset();
   closePopup(addPlacePopup);
+  const inputList = Array.from(
+    addPlaceFormElement.querySelectorAll('.form__input')
+  );
+  const button = addPlaceFormElement.querySelector('.form__submit');
+  toggleButtonState(inputList, button);
+  // toggleButtonState;
 }
 
 function handleEditInfoFormSubmit(evt) {
