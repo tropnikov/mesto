@@ -107,7 +107,6 @@ function handleAddPlaceFormSubmit(evt) {
   );
   const button = addPlaceFormElement.querySelector('.form__submit');
   toggleButtonState(inputList, button);
-  // toggleButtonState;
 }
 
 function handleEditInfoFormSubmit(evt) {
@@ -136,20 +135,20 @@ editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
 editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);
 
 //close on overlay click
-editInfoPopup.addEventListener('click', (evt) => {
+function handleCloseOnOverlayClick(evt, popup) {
   if (evt.target === evt.currentTarget) {
-    closePopup(editInfoPopup);
+    closePopup(popup);
   }
-});
+}
 
-popupPlacePhotoFull.addEventListener('click', (evt) => {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popupPlacePhotoFull);
-  }
-});
+editInfoPopup.addEventListener('click', (evt) =>
+  handleCloseOnOverlayClick(evt, editInfoPopup)
+);
 
-addPlacePopup.addEventListener('click', (evt) => {
-  if (evt.target === evt.currentTarget) {
-    closePopup(addPlacePopup);
-  }
-});
+popupPlacePhotoFull.addEventListener('click', (evt) =>
+  handleCloseOnOverlayClick(evt, popupPlacePhotoFull)
+);
+
+addPlacePopup.addEventListener('click', (evt) =>
+  handleCloseOnOverlayClick(evt, addPlacePopup)
+);

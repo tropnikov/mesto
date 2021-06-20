@@ -9,7 +9,8 @@
   color: #ffffff;
   height: 50px;
   padding: 0;
-  margin-top: 48px;
+  /* margin-top: 48px; */
+  margin-top: 13px;
   /* margin: 0; */
   /* margin-top: 31.34px; */
   width: 100%;
@@ -17,7 +18,8 @@
 
 @media screen and (max-width: 768px) {
   .button_type_save {
-    margin-top: 45px;
+    /* margin-top: 45px; */
+    margin-top: 10px;
     /* margin-top: 28.34px; */
     height: 46px;
     font-size: 14px;
