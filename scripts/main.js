@@ -134,3 +134,22 @@ editInfoButton.addEventListener('click', () => {
 });
 editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
 editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);
+
+//close on overlay click
+editInfoPopup.addEventListener('click', (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closePopup(editInfoPopup);
+  }
+});
+
+popupPlacePhotoFull.addEventListener('click', (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closePopup(popupPlacePhotoFull);
+  }
+});
+
+addPlacePopup.addEventListener('click', (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closePopup(addPlacePopup);
+  }
+});
