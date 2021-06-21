@@ -23,6 +23,10 @@ const addPlaceButtonClose = document.querySelector('.place-add__close-button');
 const addPlaceFormElement = document.querySelector('.place-add__form');
 const placeNameInput = addPlaceFormElement.querySelector("[name='place-name']");
 const placeLinkInput = addPlaceFormElement.querySelector("[name='place-link']");
+const addPlaceInputList = Array.from(
+  addPlaceFormElement.querySelectorAll('.form__input')
+);
+const addPlaceSubmitButton = addPlaceFormElement.querySelector('.form__submit');
 
 // попап просмотра фотографии места
 const popupPlacePhotoFull = document.querySelector('.place-full-photo');
@@ -102,11 +106,7 @@ function handleAddPlaceFormSubmit(evt) {
   addCard({ name: placeNameInput.value, link: placeLinkInput.value });
   addPlaceFormElement.reset();
   closePopup(addPlacePopup);
-  const inputList = Array.from(
-    addPlaceFormElement.querySelectorAll('.form__input')
-  );
-  const button = addPlaceFormElement.querySelector('.form__submit');
-  toggleButtonState(inputList, button);
+  toggleButtonState(addPlaceInputList, addPlaceSubmitButton);
 }
 
 function handleEditInfoFormSubmit(evt) {
@@ -122,15 +122,19 @@ popupPlacePhotoFullButtonClose.addEventListener('click', () =>
   closePopup(popupPlacePhotoFull)
 );
 
-addPlaceButton.addEventListener('click', () => openPopup(addPlacePopup));
+addPlaceButton.addEventListener('click', () => {
+  openPopup(addPlacePopup);
+  addPlaceFormElement.reset();
+});
 addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
 addPlaceFormElement.addEventListener('submit', handleAddPlaceFormSubmit);
 
 editInfoButton.addEventListener('click', () => {
+  openPopup(editInfoPopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileBio.textContent;
-  openPopup(editInfoPopup);
 });
+
 editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
 editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);
 
