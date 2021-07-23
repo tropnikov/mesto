@@ -1,63 +1,62 @@
-// попап редактирования профиля
-const editInfoButton = document.querySelector('.button_type_edit');
-const editInfoPopup = document.querySelector('.profile-edit');
-const editInfoButtonClose = editInfoPopup.querySelector(
-  '.profile-edit__close-button'
-);
+// // попап редактирования профиля
+// const editInfoButton = document.querySelector('.button_type_edit');
+// const editInfoPopup = document.querySelector('.profile-edit');
+// const editInfoButtonClose = editInfoPopup.querySelector(
+//   '.profile-edit__close-button'
+// );
+// const profileName = document.querySelector('.profile__name');
+// const profileBio = document.querySelector('.profile__bio');
+// const editInfoFormElement = document.querySelector('.profile-edit__form');
+// const nameInput = editInfoFormElement.querySelector("[name='profile-name']");
+// const jobInput = editInfoFormElement.querySelector("[name='profile-bio']");
 
-const profileName = document.querySelector('.profile__name');
-const profileBio = document.querySelector('.profile__bio');
-const editInfoFormElement = document.querySelector('.profile-edit__form');
-const nameInput = editInfoFormElement.querySelector("[name='profile-name']");
-const jobInput = editInfoFormElement.querySelector("[name='profile-bio']");
+// // попап добавления нового места
+// const addPlaceButton = document.querySelector('.button_type_add');
+// const addPlacePopup = document.querySelector('.place-add');
+// const addPlaceButtonClose = document.querySelector('.place-add__close-button');
+// const addPlaceFormElement = document.querySelector('.place-add__form');
+// const placeNameInput = addPlaceFormElement.querySelector("[name='place-name']");
+// const placeLinkInput = addPlaceFormElement.querySelector("[name='place-link']");
+// const addPlaceInputList = Array.from(
+//   addPlaceFormElement.querySelectorAll('.form__input')
+// );
+// const addPlaceSubmitButton = addPlaceFormElement.querySelector('.form__submit');
 
-// список с карточками
-const cardsList = document.querySelector('.places');
-// шаблон карточки
-const cardTemplate = document.querySelector('.card-template').content;
+// // список с карточками
+// const cardsList = document.querySelector('.places');
+// // шаблон карточки
+// const cardTemplate = document.querySelector('.card-template').content;
 
-// попап добавления нового места
-const addPlaceButton = document.querySelector('.button_type_add');
-const addPlacePopup = document.querySelector('.place-add');
-const addPlaceButtonClose = document.querySelector('.place-add__close-button');
-const addPlaceFormElement = document.querySelector('.place-add__form');
-const placeNameInput = addPlaceFormElement.querySelector("[name='place-name']");
-const placeLinkInput = addPlaceFormElement.querySelector("[name='place-link']");
-const addPlaceInputList = Array.from(
-  addPlaceFormElement.querySelectorAll('.form__input')
-);
-const addPlaceSubmitButton = addPlaceFormElement.querySelector('.form__submit');
+// // попап просмотра фотографии места
+// const popupPlacePhotoFull = document.querySelector('.place-full-photo');
+// const fullPhotoImage = popupPlacePhotoFull.querySelector(
+//   '.place-full-photo__image'
+// );
+// const fullPhotoCaption = popupPlacePhotoFull.querySelector(
+//   '.place-full-photo__caption'
+// );
+// const popupPlacePhotoFullButtonClose = document.querySelector(
+//   '.place-full-photo__close-button'
+// );
 
-// попап просмотра фотографии места
-const popupPlacePhotoFull = document.querySelector('.place-full-photo');
-const fullPhotoImage = popupPlacePhotoFull.querySelector(
-  '.place-full-photo__image'
-);
-const fullPhotoCaption = popupPlacePhotoFull.querySelector(
-  '.place-full-photo__caption'
-);
-const popupPlacePhotoFullButtonClose = document.querySelector(
-  '.place-full-photo__close-button'
-);
+// // функция отрисовки начальных карточек
+// function renderInitialCards() {
+//   initialCards.forEach((card) => addCard(card));
+// }
 
-// функция отрисовки начальных карточек
-function renderInitialCards() {
-  initialCards.forEach((card) => addCard(card));
-}
+// function createCard(card) {
+//   const cardElement = cardTemplate.cloneNode(true);
+//   const placePhoto = cardElement.querySelector('.place__photo');
+//   placePhoto.src = card.link;
+//   placePhoto.alt = card.name;
+//   cardElement.querySelector('.place__title').innerText = card.name;
+//   setEventListeners(cardElement);
+//   return cardElement;
+// }
 
-function createCard(card) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const placePhoto = cardElement.querySelector('.place__photo');
-  placePhoto.src = card.link;
-  placePhoto.alt = card.name;
-  cardElement.querySelector('.place__title').innerText = card.name;
-  setEventListeners(cardElement);
-  return cardElement;
-}
-
-function addCard(card) {
-  cardsList.prepend(createCard(card));
-}
+// function addCard(card) {
+//   cardsList.prepend(createCard(card));
+// }
 
 function handleCloseByEscape(evt) {
   const popup = document.querySelector('.popup_opened');
@@ -68,7 +67,6 @@ function handleCloseByEscape(evt) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  // debugger;
   document.addEventListener('keydown', handleCloseByEscape);
 }
 
