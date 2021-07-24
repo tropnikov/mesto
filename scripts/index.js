@@ -1,5 +1,7 @@
 import { initialCards } from './initial-cards.js';
 import { Card } from './Card.js';
+import { validationConfig } from './validation-config.js';
+import { FormValidator } from './FormValidator.js';
 
 // попап редактирования профиля
 const editInfoButton = document.querySelector('.button_type_edit');
@@ -27,6 +29,7 @@ const addPlaceSubmitButton = addPlaceFormElement.querySelector('.form__submit');
 
 // список с карточками
 const cardsList = document.querySelector('.places');
+const formList = Array.from(document.querySelectorAll('.form'));
 // шаблон карточки
 const cardTemplate = document.querySelector('.card-template').content;
 
@@ -60,15 +63,21 @@ function closePopup(popup) {
 }
 
 function handleAddPlaceFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  addCard({ name: placeNameInput.value, link: placeLinkInput.value });
+  evt.preventDefault();
+  cardsList.prepend(
+    new Card(
+      { name: placeNameInput.value, link: placeLinkInput.value },
+      '.card-template'
+    ).createCard()
+  );
+  // addCard({ name: placeNameInput.value, link: placeLinkInput.value });
   addPlaceFormElement.reset();
   closePopup(addPlacePopup);
-  toggleButtonState(addPlaceInputList, addPlaceSubmitButton);
+  // toggleButtonState(addPlaceInputList, addPlaceSubmitButton);
 }
 
 function handleEditInfoFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileBio.textContent = jobInput.value;
   closePopup(editInfoPopup);
@@ -120,6 +129,15 @@ function renderInitialCards() {
   });
 }
 
+function enableFormValidation() {
+  formList.forEach((formElement) => {
+    const formValidator = new FormValidator(validationConfig, formElement);
+    formValidator.enableValidation();
+  });
+}
+
 renderInitialCards();
+
+enableFormValidation();
 
 export { fullPhotoImage, fullPhotoCaption, popupPlacePhotoFull };

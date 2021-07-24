@@ -152,7 +152,12 @@
           <span class="place-link-input-error form__input-error"></span>
           <button
             type="submit"
-            class="popup__save button form__submit button_type_save"
+            class="
+              popup__save
+              button
+              form__submit
+              button_type_save button_disabled
+            "
             disabled
           >
             Создать
@@ -191,9 +196,10 @@
       </li>
     </template>
 
-    <!-- <script type="module" src="./scripts/validation.js"></script> -->
+    <script type="module" src="./scripts/validation-config.js"></script>
     <script type="module" src="./scripts/initial-cards.js"></script>
     <script type="module" src="./scripts/index.js"></script>
     <script type="module" src="./scripts/Card.js"></script>
+    <script type="module" src="./scripts/FormValidator.js"></script>
   </body>
 </html>
