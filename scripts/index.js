@@ -59,13 +59,6 @@ function closePopup(popup) {
   document.removeEventListener('keydown', handleCloseByEscape);
 }
 
-export function handleOpenFull(element) {
-  openPopup(popupPlacePhotoFull);
-  fullPhotoImage.src = element.src;
-  fullPhotoImage.alt = element.alt;
-  fullPhotoCaption.textContent = element.alt;
-}
-
 function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   addCard({ name: placeNameInput.value, link: placeLinkInput.value });
@@ -123,8 +116,6 @@ addPlacePopup.addEventListener('click', (evt) =>
 function renderInitialCards() {
   initialCards.forEach((item) => {
     const card = new Card(item, '.card-template');
-    // console.log(card);
-    // const cardElement = card.createCard();
     cardsList.prepend(card.createCard());
   });
 }

@@ -1,17 +1,16 @@
 {
   "overrides": [
-  {
-    "files": "*.js",
-    "options": {
-      "singleQuote": true
+    {
+      "files": "*.js",
+      "options": {
+        "singleQuote": true
+      }
+    },
+    {
+      "files": ["*.html", "*.css"],
+      "options": {
+        "singleQuote": false
+      }
     }
-  },
-  {
-    "files": ["*.html", "*.css"],
-    "options": {
-      "singleQuote": false
-    }
-  }
-]
+  ]
 }
-

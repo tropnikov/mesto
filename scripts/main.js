@@ -25,7 +25,6 @@
 // // список с карточками
 // const cardsList = document.querySelector('.places');
 // // шаблон карточки
-// const cardTemplate = document.querySelector('.card-template').content;
 
 // // попап просмотра фотографии места
 // const popupPlacePhotoFull = document.querySelector('.place-full-photo');
@@ -44,15 +43,18 @@
 //   initialCards.forEach((card) => addCard(card));
 // }
 
-// function createCard(card) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   const placePhoto = cardElement.querySelector('.place__photo');
-//   placePhoto.src = card.link;
-//   placePhoto.alt = card.name;
-//   cardElement.querySelector('.place__title').innerText = card.name;
-//   setEventListeners(cardElement);
-//   return cardElement;
-// }
+const cardTemplate = document.querySelector('.card-template').content;
+
+function createCard(card) {
+  const cardElement = cardTemplate.cloneNode(true);
+
+  const placePhoto = cardElement.querySelector('.place__photo');
+  placePhoto.src = card.link;
+  placePhoto.alt = card.name;
+  cardElement.querySelector('.place__title').innerText = card.name;
+  setEventListeners(cardElement);
+  return cardElement;
+}
 
 // function addCard(card) {
 //   cardsList.prepend(createCard(card));
