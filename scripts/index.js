@@ -30,6 +30,7 @@ const addPlaceSubmitButton = addPlaceFormElement.querySelector('.form__submit');
 // список с карточками
 const cardsList = document.querySelector('.places');
 const formList = Array.from(document.querySelectorAll('.form'));
+
 // шаблон карточки
 const cardTemplate = document.querySelector('.card-template').content;
 
@@ -64,8 +65,6 @@ function closePopup(popup) {
 
 function createCard(card) {
   return new Card(card, '.card-template').createCard();
-  // return cardElement;
-  // return cardElement;
 }
 
 function addCard(card) {
@@ -75,16 +74,8 @@ function addCard(card) {
 function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault();
   addCard({ name: placeNameInput.value, link: placeLinkInput.value });
-  // cardsList.prepend(
-  //   new Card(
-  //     { name: placeNameInput.value, link: placeLinkInput.value },
-  //     '.card-template'
-  //   ).createCard()
-  // );
-  // addCard({ name: placeNameInput.value, link: placeLinkInput.value });
   addPlaceFormElement.reset();
   closePopup(addPlacePopup);
-  // toggleButtonState(addPlaceInputList, addPlaceSubmitButton);
 }
 
 function handleEditInfoFormSubmit(evt) {
@@ -101,9 +92,10 @@ popupPlacePhotoFullButtonClose.addEventListener('click', () =>
 addPlaceButton.addEventListener('click', () => {
   openPopup(addPlacePopup);
   addPlaceFormElement.reset();
-  formValidator.hideError();
-  console.log('1');
+  addPlaceFormValidator.hideError(); //hide error after invalid input and popup close
+  // console.log('1');
 });
+
 addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
 addPlaceFormElement.addEventListener('submit', handleAddPlaceFormSubmit);
 
@@ -111,6 +103,7 @@ editInfoButton.addEventListener('click', () => {
   openPopup(editInfoPopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileBio.textContent;
+  editInfoFormValidator.hideError();
 });
 
 editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
@@ -138,20 +131,21 @@ addPlacePopup.addEventListener('click', (evt) =>
 function renderInitialCards() {
   initialCards.forEach((item) => {
     addCard(item);
-    // const card = new Card(item, '.card-template');
-    // cardsList.prepend(card.createCard());
   });
 }
 
-function enableFormValidation() {
-  formList.forEach((formElement) => {
-    const formValidator = new FormValidator(validationConfig, formElement);
-    formValidator.enableValidation();
-  });
-}
+const editInfoFormValidator = new FormValidator(
+  validationConfig,
+  editInfoFormElement
+);
+editInfoFormValidator.enableValidation();
+
+const addPlaceFormValidator = new FormValidator(
+  validationConfig,
+  addPlaceFormElement
+);
+addPlaceFormValidator.enableValidation();
 
 renderInitialCards();
-
-enableFormValidation();
 
 export { fullPhotoImage, fullPhotoCaption, popupPlacePhotoFull };
