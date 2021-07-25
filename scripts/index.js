@@ -62,14 +62,25 @@ function closePopup(popup) {
   document.removeEventListener('keydown', handleCloseByEscape);
 }
 
+function createCard(card) {
+  return new Card(card, '.card-template').createCard();
+  // return cardElement;
+  // return cardElement;
+}
+
+function addCard(card) {
+  cardsList.prepend(createCard(card));
+}
+
 function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault();
-  cardsList.prepend(
-    new Card(
-      { name: placeNameInput.value, link: placeLinkInput.value },
-      '.card-template'
-    ).createCard()
-  );
+  addCard({ name: placeNameInput.value, link: placeLinkInput.value });
+  // cardsList.prepend(
+  //   new Card(
+  //     { name: placeNameInput.value, link: placeLinkInput.value },
+  //     '.card-template'
+  //   ).createCard()
+  // );
   // addCard({ name: placeNameInput.value, link: placeLinkInput.value });
   addPlaceFormElement.reset();
   closePopup(addPlacePopup);
@@ -90,6 +101,8 @@ popupPlacePhotoFullButtonClose.addEventListener('click', () =>
 addPlaceButton.addEventListener('click', () => {
   openPopup(addPlacePopup);
   addPlaceFormElement.reset();
+  formValidator.hideError();
+  console.log('1');
 });
 addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
 addPlaceFormElement.addEventListener('submit', handleAddPlaceFormSubmit);
@@ -124,8 +137,9 @@ addPlacePopup.addEventListener('click', (evt) =>
 
 function renderInitialCards() {
   initialCards.forEach((item) => {
-    const card = new Card(item, '.card-template');
-    cardsList.prepend(card.createCard());
+    addCard(item);
+    // const card = new Card(item, '.card-template');
+    // cardsList.prepend(card.createCard());
   });
 }
 

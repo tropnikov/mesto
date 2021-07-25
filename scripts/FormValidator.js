@@ -51,6 +51,12 @@ export class FormValidator {
     errorElement.textContent = '';
   };
 
+  hideError = () => {
+    this.#inputList.forEach((inputElement) => {
+      this.#hideInputError(inputElement);
+    });
+  };
+
   #setFormEventListeners = () => {
     // console.log('1');
     this.#toggleButtonState();

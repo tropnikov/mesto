@@ -8,25 +8,31 @@ import {
 export class Card {
   #name;
   #link;
-  #template;
+  #templateSelector;
   #card;
   #deleteButton;
   #likeButton;
+  #placePhoto;
 
   constructor(data, templateSelector) {
     this.#name = data.name;
     this.#link = data.link;
-    this.#template = document.querySelector(templateSelector).content;
+    this.#templateSelector = templateSelector;
   }
 
   #getTemplate = () => {
-    return this.#template.cloneNode(true).children[0];
+    const cardElement = document
+      .querySelector(this.#templateSelector)
+      .content.querySelector('.place')
+      .cloneNode(true);
+    return cardElement;
   };
 
   createCard = () => {
     this.#card = this.#getTemplate();
-    this.#card.querySelector('.place__photo').src = this.#link;
-    this.#card.querySelector('.place__photo').alt = this.#name;
+    this.#placePhoto = this.#card.querySelector('.place__photo');
+    this.#placePhoto.src = this.#link;
+    this.#placePhoto.alt = this.#name;
     this.#card.querySelector('.place__title').innerText = this.#name;
     this.#deleteButton = this.#card.querySelector('.place__delete');
     this.#likeButton = this.#card.querySelector('.place__like');
@@ -41,7 +47,7 @@ export class Card {
     this.#likeButton.addEventListener('click', () => {
       this.#likeCard();
     });
-    this.#card.querySelector('.place__photo').addEventListener('click', () => {
+    this.#placePhoto.addEventListener('click', () => {
       this.#openFullCard();
     });
   };
