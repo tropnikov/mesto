@@ -19,7 +19,7 @@ const jobInput = editInfoFormElement.querySelector("[name='profile-bio']");
 
 // попап добавления нового места
 const addPlaceButton = document.querySelector('.button_type_add');
-const addPlacePopup = document.querySelector('.place-add');
+// const addPlacePopup = document.querySelector('.place-add');
 const addPlaceButtonClose = document.querySelector('.place-add__close-button');
 const addPlaceFormElement = document.querySelector('.place-add__form');
 const placeNameInput = addPlaceFormElement.querySelector("[name='place-name']");
@@ -48,22 +48,22 @@ const popupPlacePhotoFullButtonClose = document.querySelector(
   '.place-full-photo__close-button'
 );
 
-function handleCloseByEscape(evt) {
-  const popup = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') {
-    closePopup(popup);
-  }
-}
+// function handleCloseByEscape(evt) {
+//   const popup = document.querySelector('.popup_opened');
+//   if (evt.key === 'Escape') {
+//     closePopup(popup);
+//   }
+// }
 
-export function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handleCloseByEscape);
-}
+// export function openPopup(popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', handleCloseByEscape);
+// }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleCloseByEscape);
-}
+// function closePopup(popup) {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', handleCloseByEscape);
+// }
 
 // function createCard(card) {
 //   return new Card(card, '.card-template').createCard();
@@ -87,48 +87,51 @@ function handleEditInfoFormSubmit(evt) {
   closePopup(editInfoPopup);
 }
 
-popupPlacePhotoFullButtonClose.addEventListener('click', () =>
-  closePopup(popupPlacePhotoFull)
-);
+// popupPlacePhotoFullButtonClose.addEventListener('click', () =>
+//   closePopup(popupPlacePhotoFull)
+// );
 
 addPlaceButton.addEventListener('click', () => {
-  openPopup(addPlacePopup);
+  addPlacePopup.open();
+
+  // openPopup(addPlacePopup);
   addPlaceFormElement.reset();
   addPlaceFormValidator.hideError(); //hide error after invalid input and popup close
   // console.log('1');
 });
 
-addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
+// addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
 addPlaceFormElement.addEventListener('submit', handleAddPlaceFormSubmit);
 
 editInfoButton.addEventListener('click', () => {
-  openPopup(editInfoPopup);
+  const editInfoPopup = new Popup('.profile-edit');
+  editInfoPopup.open();
   nameInput.value = profileName.textContent;
   jobInput.value = profileBio.textContent;
   editInfoFormValidator.hideError();
 });
 
-editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
+// editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
 editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);
 
 //close on overlay click
-function handleCloseOnOverlayClick(evt, popup) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popup);
-  }
-}
+// function handleCloseOnOverlayClick(evt, popup) {
+//   if (evt.target === evt.currentTarget) {
+//     closePopup(popup);
+//   }
+// }
 
-editInfoPopup.addEventListener('click', (evt) =>
-  handleCloseOnOverlayClick(evt, editInfoPopup)
-);
+// editInfoPopup.addEventListener('click', (evt) =>
+//   handleCloseOnOverlayClick(evt, editInfoPopup)
+// );
 
-popupPlacePhotoFull.addEventListener('click', (evt) =>
-  handleCloseOnOverlayClick(evt, popupPlacePhotoFull)
-);
+// popupPlacePhotoFull.addEventListener('click', (evt) =>
+//   handleCloseOnOverlayClick(evt, popupPlacePhotoFull)
+// );
 
-addPlacePopup.addEventListener('click', (evt) =>
-  handleCloseOnOverlayClick(evt, addPlacePopup)
-);
+// addPlacePopup.addEventListener('click', (evt) =>
+//   handleCloseOnOverlayClick(evt, addPlacePopup)
+// );
 
 // function renderInitialCards() {
 //   initialCards.forEach((item) => {
@@ -159,6 +162,9 @@ const addPlaceFormValidator = new FormValidator(
   addPlaceFormElement
 );
 addPlaceFormValidator.enableValidation();
+
+const addPlacePopup = new Popup('.place-add');
+addPlacePopup.setEventListeners();
 
 cardsList.renderItems();
 

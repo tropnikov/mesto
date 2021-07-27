@@ -1,5 +1,5 @@
 import {
-  openPopup,
+  // openPopup,
   fullPhotoCaption,
   fullPhotoImage,
   popupPlacePhotoFull,
@@ -61,7 +61,7 @@ export class Card {
   };
 
   #openFullCard = () => {
-    openPopup(popupPlacePhotoFull);
+    // openPopup(popupPlacePhotoFull);
     fullPhotoImage.src = this.#link;
     fullPhotoImage.alt = this.#name;
     fullPhotoCaption.textContent = this.#name;
