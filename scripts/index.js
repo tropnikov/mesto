@@ -2,6 +2,8 @@ import { initialCards } from './initial-cards.js';
 import { Card } from './Card.js';
 import { validationConfig } from './validation-config.js';
 import { FormValidator } from './FormValidator.js';
+import Section from './Section.js';
+import Popup from './Popup.js';
 
 // попап редактирования профиля
 const editInfoButton = document.querySelector('.button_type_edit');
@@ -28,7 +30,7 @@ const addPlaceInputList = Array.from(
 const addPlaceSubmitButton = addPlaceFormElement.querySelector('.form__submit');
 
 // список с карточками
-const cardsList = document.querySelector('.places');
+// const cardsList = document.querySelector('.places');
 const formList = Array.from(document.querySelectorAll('.form'));
 
 // шаблон карточки
@@ -63,13 +65,13 @@ function closePopup(popup) {
   document.removeEventListener('keydown', handleCloseByEscape);
 }
 
-function createCard(card) {
-  return new Card(card, '.card-template').createCard();
-}
+// function createCard(card) {
+//   return new Card(card, '.card-template').createCard();
+// }
 
-function addCard(card) {
-  cardsList.prepend(createCard(card));
-}
+// function addCard(card) {
+//   cardsList.prepend(createCard(card));
+// }
 
 function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault();
@@ -128,11 +130,23 @@ addPlacePopup.addEventListener('click', (evt) =>
   handleCloseOnOverlayClick(evt, addPlacePopup)
 );
 
-function renderInitialCards() {
-  initialCards.forEach((item) => {
-    addCard(item);
-  });
-}
+// function renderInitialCards() {
+//   initialCards.forEach((item) => {
+//     addCard(item);
+//   });
+// }
+
+const cardsList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, '.card-template');
+      const cardElement = card.createCard();
+      cardsList.addItem(cardElement);
+    },
+  },
+  '.places'
+);
 
 const editInfoFormValidator = new FormValidator(
   validationConfig,
@@ -146,6 +160,8 @@ const addPlaceFormValidator = new FormValidator(
 );
 addPlaceFormValidator.enableValidation();
 
-renderInitialCards();
+cardsList.renderItems();
+
+// renderInitialCards();
 
 export { fullPhotoImage, fullPhotoCaption, popupPlacePhotoFull };
