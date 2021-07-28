@@ -1,3 +1,5 @@
+// import Card from './Card.js';
+
 export default class Popup {
   #popup;
 
@@ -5,23 +7,24 @@ export default class Popup {
     this.#popup = document.querySelector(popupSelector);
   }
 
-  open = () => {
+  open() {
     this.#popup.classList.add('popup_opened');
     document.addEventListener('keydown', this.#handleEscClose);
-  };
+  }
 
-  close = () => {
+  close() {
     this.#popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', this.#handleEscClose);
-  };
+  }
 
   #handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
       this.close();
+      console.log('1');
     }
   };
 
-  setEventListeners = () => {
+  setEventListeners() {
     this.#popup.querySelector('.popup__close').addEventListener('click', () => {
       this.close();
     });
@@ -31,5 +34,5 @@ export default class Popup {
         this.close();
       }
     });
-  };
+  }
 }

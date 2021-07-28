@@ -1,9 +1,11 @@
 import { initialCards } from './initial-cards.js';
-import { Card } from './Card.js';
+import Card from './Card.js';
 import { validationConfig } from './validation-config.js';
 import { FormValidator } from './FormValidator.js';
 import Section from './Section.js';
-import Popup from './Popup.js';
+// import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 
 // попап редактирования профиля
 const editInfoButton = document.querySelector('.button_type_edit');
@@ -73,46 +75,37 @@ const popupPlacePhotoFullButtonClose = document.querySelector(
 //   cardsList.prepend(createCard(card));
 // }
 
-function handleAddPlaceFormSubmit(evt) {
-  evt.preventDefault();
-  addCard({ name: placeNameInput.value, link: placeLinkInput.value });
-  addPlaceFormElement.reset();
-  closePopup(addPlacePopup);
-}
+// function handleAddPlaceFormSubmit(evt) {
+//   evt.preventDefault();
+//   addCard({ name: placeNameInput.value, link: placeLinkInput.value });
+//   addPlaceFormElement.reset();
+//   closePopup(addPlacePopup);
+// }
 
-function handleEditInfoFormSubmit(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileBio.textContent = jobInput.value;
-  closePopup(editInfoPopup);
-}
+// function handleEditInfoFormSubmit(evt) {
+//   evt.preventDefault();
+//   profileName.textContent = nameInput.value;
+//   profileBio.textContent = jobInput.value;
+//   closePopup(editInfoPopup);
+// }
 
 // popupPlacePhotoFullButtonClose.addEventListener('click', () =>
 //   closePopup(popupPlacePhotoFull)
 // );
 
-addPlaceButton.addEventListener('click', () => {
-  addPlacePopup.open();
-
-  // openPopup(addPlacePopup);
-  addPlaceFormElement.reset();
-  addPlaceFormValidator.hideError(); //hide error after invalid input and popup close
-  // console.log('1');
-});
-
 // addPlaceButtonClose.addEventListener('click', () => closePopup(addPlacePopup));
-addPlaceFormElement.addEventListener('submit', handleAddPlaceFormSubmit);
+// addPlaceFormElement.addEventListener('submit', handleAddPlaceFormSubmit);
 
-editInfoButton.addEventListener('click', () => {
-  const editInfoPopup = new Popup('.profile-edit');
-  editInfoPopup.open();
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileBio.textContent;
-  editInfoFormValidator.hideError();
-});
+// editInfoButton.addEventListener('click', () => {
+//   const editInfoPopup = new Popup(editInfoPopupSelector);
+//   editInfoPopup.open();
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileBio.textContent;
+//   editInfoFormValidator.hideError();
+// });
 
-// editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
-editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);
+// // editInfoButtonClose.addEventListener('click', () => closePopup(editInfoPopup));
+// editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);
 
 //close on overlay click
 // function handleCloseOnOverlayClick(evt, popup) {
@@ -138,17 +131,54 @@ editInfoFormElement.addEventListener('submit', handleEditInfoFormSubmit);
 //     addCard(item);
 //   });
 // }
+const addPlacePopupSelector = '.place-add';
+const editInfoPopupSelector = '.profile-edit';
+const popupFullPhotoSelector = '.place-full-photo';
+const cardTemplateSelector = '.card-template';
+const cardsContainerSelector = '.places';
+
+const popupFullPhoto = new PopupWithImage(popupFullPhotoSelector);
+popupFullPhoto.setEventListeners();
+
+const popupEditInfo = new PopupWithForm(editInfoPopupSelector, (inputData) => {
+  profileName.textContent = inputData['profile-name'];
+  profileBio.textContent = inputData['profile-bio'];
+  popupEditInfo.close();
+  // closePopup(editInfoPopup);
+});
+popupEditInfo.setEventListeners();
+editInfoButton.addEventListener('click', () => {
+  popupEditInfo.open();
+
+  // openPopup(addPlacePopup);
+  // addPlaceFormElement.reset();
+  // addPlaceFormValidator.hideError(); //hide error after invalid input and popup close
+  // console.log('1');
+});
+
+const popupAddPlace = new PopupWithForm(addPlacePopupSelector, () => {});
+popupAddPlace.setEventListeners();
+addPlaceButton.addEventListener('click', () => {
+  popupAddPlace.open();
+
+  // openPopup(addPlacePopup);
+  // addPlaceFormElement.reset();
+  // addPlaceFormValidator.hideError(); //hide error after invalid input and popup close
+  // console.log('1');
+});
 
 const cardsList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, '.card-template');
+      const card = new Card(item, cardTemplateSelector, (name, link) => {
+        popupFullPhoto.open(name, link);
+      });
       const cardElement = card.createCard();
       cardsList.addItem(cardElement);
     },
   },
-  '.places'
+  cardsContainerSelector
 );
 
 const editInfoFormValidator = new FormValidator(
@@ -163,11 +193,11 @@ const addPlaceFormValidator = new FormValidator(
 );
 addPlaceFormValidator.enableValidation();
 
-const addPlacePopup = new Popup('.place-add');
-addPlacePopup.setEventListeners();
+// const addPlacePopup = new Popup(addPlacePopupSelector);
+// addPlacePopup.setEventListeners();
 
 cardsList.renderItems();
 
 // renderInitialCards();
 
-export { fullPhotoImage, fullPhotoCaption, popupPlacePhotoFull };
+// export { fullPhotoImage, fullPhotoCaption, popupPlacePhotoFull };

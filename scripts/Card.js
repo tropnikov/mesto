@@ -1,11 +1,13 @@
-import {
-  // openPopup,
-  fullPhotoCaption,
-  fullPhotoImage,
-  popupPlacePhotoFull,
-} from './index.js';
+// import {
+//   // openPopup,
+//   fullPhotoCaption,
+//   fullPhotoImage,
+//   popupPlacePhotoFull,
+// } from './index.js';
+// import Popup from './Popup.js';
+// import PopupWithImage from './PopupWithImage.js';
 
-export class Card {
+export default class Card {
   #name;
   #link;
   #templateSelector;
@@ -13,22 +15,24 @@ export class Card {
   #deleteButton;
   #likeButton;
   #placePhoto;
+  #handleCardClick;
 
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this.#name = data.name;
     this.#link = data.link;
     this.#templateSelector = templateSelector;
+    this.#handleCardClick = handleCardClick;
   }
 
-  #getTemplate = () => {
+  #getTemplate() {
     const cardElement = document
       .querySelector(this.#templateSelector)
       .content.querySelector('.place')
       .cloneNode(true);
     return cardElement;
-  };
+  }
 
-  createCard = () => {
+  createCard() {
     this.#card = this.#getTemplate();
     this.#placePhoto = this.#card.querySelector('.place__photo');
     this.#placePhoto.src = this.#link;
@@ -38,9 +42,9 @@ export class Card {
     this.#likeButton = this.#card.querySelector('.place__like');
     this.#setEventListeners();
     return this.#card;
-  };
+  }
 
-  #setEventListeners = () => {
+  #setEventListeners() {
     this.#deleteButton.addEventListener('click', () => {
       this.#deleteCard();
     });
@@ -48,22 +52,15 @@ export class Card {
       this.#likeCard();
     });
     this.#placePhoto.addEventListener('click', () => {
-      this.#openFullCard();
+      this.#handleCardClick(this.#name, this.#link);
     });
-  };
+  }
 
-  #deleteCard = () => {
+  #deleteCard() {
     this.#card.remove();
-  };
+  }
 
-  #likeCard = () => {
+  #likeCard() {
     this.#likeButton.classList.toggle('place__like_active');
-  };
-
-  #openFullCard = () => {
-    // openPopup(popupPlacePhotoFull);
-    fullPhotoImage.src = this.#link;
-    fullPhotoImage.alt = this.#name;
-    fullPhotoCaption.textContent = this.#name;
-  };
+  }
 }
