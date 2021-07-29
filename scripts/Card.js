@@ -1,12 +1,3 @@
-// import {
-//   // openPopup,
-//   fullPhotoCaption,
-//   fullPhotoImage,
-//   popupPlacePhotoFull,
-// } from './index.js';
-// import Popup from './Popup.js';
-// import PopupWithImage from './PopupWithImage.js';
-
 export default class Card {
   #name;
   #link;

@@ -1,5 +1,3 @@
-// import Card from './Card.js';
-
 export default class Popup {
   #popup;
 
@@ -20,7 +18,6 @@ export default class Popup {
   #handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
       this.close();
-      console.log('1');
     }
   };
 
