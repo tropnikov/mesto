@@ -1,4 +1,4 @@
-import './index.css';
+import "./index.css";
 
 import {
   initialCards,
@@ -15,14 +15,14 @@ import {
   bioInput,
   nameInput,
   userData,
-} from '../scripts/constants.js';
+} from "../utils/constants.js";
 
-import FormValidator from '../scripts/FormValidator.js';
-import Section from '../scripts/Section.js';
-import Card from '../scripts/Card.js';
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
-import UserInfo from '../scripts/UserInfo.js';
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import Card from "../components/Card.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 const userInfo = new UserInfo(userData);
 
@@ -35,7 +35,7 @@ const popupEditInfo = new PopupWithForm(editInfoPopupSelector, (inputData) => {
 });
 
 popupEditInfo.setEventListeners();
-editInfoButton.addEventListener('click', () => {
+editInfoButton.addEventListener("click", () => {
   popupEditInfo.open();
   const profileData = userInfo.getUserInfo();
   nameInput.value = profileData.name;
@@ -53,7 +53,7 @@ const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
 });
 
 popupAddPlace.setEventListeners();
-addPlaceButton.addEventListener('click', () => {
+addPlaceButton.addEventListener("click", () => {
   popupAddPlace.open();
   addPlaceFormElement.reset();
   addPlaceFormValidator.hideError();
