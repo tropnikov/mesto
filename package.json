@@ -1,5 +1,5 @@
 {
-  "name": "mest",
+  "name": "mesto",
   "version": "1.0.0",
   "description": "Mesto Project in the Web-Developer course on Yandex.Practicum ",
   "main": "index.js",
@@ -34,5 +34,6 @@
   },
   "dependencies": {
     "core-js": "^3.15.2"
-  }
+  },
+  "keywords": []
 }

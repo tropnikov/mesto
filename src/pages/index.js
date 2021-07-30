@@ -1,4 +1,4 @@
-import "./index.css";
+import './index.css';
 
 import {
   initialCards,
@@ -15,14 +15,14 @@ import {
   bioInput,
   nameInput,
   userData,
-} from "../utils/constants.js";
+} from '../utils/constants.js';
 
-import FormValidator from "../components/FormValidator.js";
-import Section from "../components/Section.js";
-import Card from "../components/Card.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
-import UserInfo from "../components/UserInfo.js";
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const userInfo = new UserInfo(userData);
 
@@ -35,7 +35,7 @@ const popupEditInfo = new PopupWithForm(editInfoPopupSelector, (inputData) => {
 });
 
 popupEditInfo.setEventListeners();
-editInfoButton.addEventListener("click", () => {
+editInfoButton.addEventListener('click', () => {
   popupEditInfo.open();
   const profileData = userInfo.getUserInfo();
   nameInput.value = profileData.name;
@@ -43,17 +43,20 @@ editInfoButton.addEventListener("click", () => {
   editInfoFormValidator.hideError();
 });
 
-const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
-  const newCard = new Card(inputData, cardTemplateSelector, (name, link) => {
+function createCard(item) {
+  const card = new Card(item, cardTemplateSelector, (name, link) => {
     popupFullPhoto.open(name, link);
   });
-  const cardElement = newCard.createCard();
-  cardsList.addItem(cardElement);
+  return card.createCard();
+}
+
+const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
+  cardsList.addItem(createCard(inputData));
   popupAddPlace.close();
 });
 
 popupAddPlace.setEventListeners();
-addPlaceButton.addEventListener("click", () => {
+addPlaceButton.addEventListener('click', () => {
   popupAddPlace.open();
   addPlaceFormElement.reset();
   addPlaceFormValidator.hideError();
@@ -63,11 +66,7 @@ const cardsList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item, cardTemplateSelector, (name, link) => {
-        popupFullPhoto.open(name, link);
-      });
-      const cardElement = card.createCard();
-      cardsList.addItem(cardElement);
+      cardsList.addItem(createCard(item));
     },
   },
   cardsContainerSelector

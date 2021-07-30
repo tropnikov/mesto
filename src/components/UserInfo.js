@@ -1,19 +1,25 @@
 export default class UserInfo {
-  #userDataSelectors;
+  #profileName;
+  #profileBio;
 
   constructor(userDataSelectors) {
-    this.#userDataSelectors = userDataSelectors;
+    this.#profileName = document.querySelector(
+      userDataSelectors.profileNameSelector
+    );
+    this.#profileBio = document.querySelector(
+      userDataSelectors.profileBioSelector
+    );
   }
 
   getUserInfo() {
     return {
-      name: this.#userDataSelectors.profileNameSelector.textContent,
-      bio: this.#userDataSelectors.profileBioSelector.textContent,
+      name: this.#profileName.textContent,
+      bio: this.#profileBio.textContent,
     };
   }
 
   setUserInfo(newUserData) {
-    this.#userDataSelectors.profileNameSelector.textContent = newUserData.name;
-    this.#userDataSelectors.profileBioSelector.textContent = newUserData.bio;
+    this.#profileName.textContent = newUserData.name;
+    this.#profileBio.textContent = newUserData.bio;
   }
 }
