@@ -7,10 +7,12 @@ export default class Card {
   #likeButton;
   #placePhoto;
   #handleCardClick;
+  #likesCount;
 
   constructor(data, templateSelector, handleCardClick) {
     this.#name = data.name;
     this.#link = data.link;
+    this.#likesCount = data.likes.length;
     this.#templateSelector = templateSelector;
     this.#handleCardClick = handleCardClick;
   }
@@ -31,6 +33,8 @@ export default class Card {
     this.#card.querySelector('.place__title').innerText = this.#name;
     this.#deleteButton = this.#card.querySelector('.place__delete');
     this.#likeButton = this.#card.querySelector('.place__like');
+    this.#card.querySelector('.place__likes-count').textContent =
+      this.#likesCount;
     this.#setEventListeners();
     return this.#card;
   }

@@ -1,6 +1,7 @@
 export default class UserInfo {
   #profileName;
   #profileBio;
+  #profileAvatar;
 
   constructor(userDataSelectors) {
     this.#profileName = document.querySelector(
@@ -8,6 +9,9 @@ export default class UserInfo {
     );
     this.#profileBio = document.querySelector(
       userDataSelectors.profileBioSelector
+    );
+    this.#profileAvatar = document.querySelector(
+      userDataSelectors.profileAvatarSelector
     );
   }
 

@@ -44,9 +44,15 @@ export const addPlaceButton = document.querySelector('.button_type_add');
 export const addPlaceFormElement = document.querySelector('.place-add__form');
 export const addPlacePopupSelector = '.place-add';
 export const editInfoPopupSelector = '.profile-edit';
+export const confirmDeletionPopupSelector = '.card-delete-confirmation';
 export const popupFullPhotoSelector = '.place-full-photo';
 export const cardTemplateSelector = '.card-template';
 export const cardsContainerSelector = '.places';
 export const profileNameSelector = '.profile__name';
 export const profileBioSelector = '.profile__bio';
-export const userData = { profileNameSelector, profileBioSelector };
+export const profileAvatarSelector = '.profile__avatar';
+export const userData = {
+  profileNameSelector,
+  profileBioSelector,
+  profileAvatarSelector,
+};

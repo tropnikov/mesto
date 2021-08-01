@@ -18,7 +18,10 @@
 @import url(../blocks/place/place.css);
 @import url(../blocks/place/__photo/place__photo.css);
 @import url(../blocks/place/__info/place__info.css);
+
 @import url(../blocks/place/__title/place__title.css);
+@import url(../blocks/place/__likes-container/place__likes-container.css);
+@import url(../blocks/place/__likes-count/place__likes-count.css);
 @import url(../blocks/place/__like/place__like.css);
 @import url(../blocks/place/__delete/place__delete.css);
 @import url(../blocks/place/__like/_active/place__like_active.css);

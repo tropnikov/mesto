@@ -184,13 +184,42 @@
       </div>
     </div>
 
+    <!-- попап подтверждения удаления карточки -->
+    <div class="popup card-delete-confirmation">
+      <div class="popup__container">
+        <button
+          class="
+            popup__close
+            button button_type_close
+            card-delete-confirmation__close-button
+            hover
+          "
+          type="button"
+          aria-label="Закрыть попап"
+        ></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+
+
+          <button
+            type="submit"
+            class="popup__save button form__submit button_type_save"
+          >
+            Да
+          </button>
+        </form>
+      </div>
+    </div>
+
     <template class="card-template">
       <li class="place">
         <img class="place__photo" src="#" alt="Фотография места" />
         <button type="button" class="place__delete hover"></button>
         <div class="place__info">
           <h3 class="place__title">Карачаевск</h3>
-          <button class="place__like" type="button"></button>
+          <div class="place__likes-container">
+            <button class="place__like" type="button"></button>
+            <p class="place__likes-count"></p>
+          </div>
         </div>
       </li>
     </template>
