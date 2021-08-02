@@ -1,9 +1,0 @@
-.page__content {
-  margin-top: 40px;
-}
-
-@media screen and (max-width: 768px) {
-  .page__content {
-    padding: 0 19px;
-  }
-}
