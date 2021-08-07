@@ -9,32 +9,28 @@ export default class Api {
     this.#headers = options.headers;
   }
 
+  #handleResponse = (response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      return Promise.reject(`Ошибка: ${response.status}`);
+    }
+  };
+
   getInitialCards() {
     return fetch(this.#baseUrl + '/cards', {
       headers: this.#headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    });
+    }).then(this.#handleResponse);
   }
 
   getUserData() {
     return fetch(this.#baseUrl + '/users/me', {
       headers: this.#headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    });
+    }).then(this.#handleResponse);
   }
 
   saveUserData(inputData) {
-    fetch(this.#baseUrl + '/users/me', {
+    return fetch(this.#baseUrl + '/users/me', {
       method: 'PATCH',
       headers: {
         authorization: '3936a02f-bc3d-48a7-bceb-bcb201e7df53',
@@ -44,15 +40,11 @@ export default class Api {
         name: inputData.name,
         about: inputData.bio,
       }),
-    }).then((res) => {
-      if (!res.ok) {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    });
+    }).then(this.#handleResponse);
   }
 
   addNewCard(cardData) {
-    fetch(this.#baseUrl + '/cards', {
+    return fetch(this.#baseUrl + '/cards', {
       method: 'POST',
       headers: {
         authorization: '3936a02f-bc3d-48a7-bceb-bcb201e7df53',
@@ -62,14 +54,17 @@ export default class Api {
         name: cardData.name,
         link: cardData.link,
       }),
-    }).then((res) => {
-      if (res.ok) {
-        console.log(res);
-        // return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    });
+    }).then(this.#handleResponse);
+  }
+
+  deleteCard(cardId) {
+    return fetch(this.#baseUrl + `/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: '3936a02f-bc3d-48a7-bceb-bcb201e7df53',
+        'Content-Type': 'application/json',
+      },
+    }).then(this.#handleResponse);
   }
 
   // другие методы работы с API

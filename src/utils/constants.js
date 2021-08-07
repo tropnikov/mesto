@@ -51,8 +51,10 @@ export const cardsContainerSelector = '.places';
 export const profileNameSelector = '.profile__name';
 export const profileBioSelector = '.profile__bio';
 export const profileAvatarSelector = '.profile__avatar';
-export const userData = {
+export const userDataSelectors = {
   profileNameSelector,
   profileBioSelector,
   profileAvatarSelector,
 };
+export const deletePlaceButton = document.querySelector('.button_type_delete');
+export const deletePlacePopupSelector = '.place__delete';

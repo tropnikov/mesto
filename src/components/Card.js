@@ -1,3 +1,4 @@
+import { myUserId } from '../pages/index.js';
 export default class Card {
   #name;
   #link;
@@ -8,13 +9,27 @@ export default class Card {
   #placePhoto;
   #handleCardClick;
   #likesCount;
+  #owner;
+  #handleCardDelete;
+  #cardId;
 
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, handleCardDelete) {
     this.#name = data.name;
     this.#link = data.link;
-    this.#likesCount = data.likes.length;
+    this.#owner = data.owner._id;
+    this.#cardId = data._id;
+    if (data.likes.length) {
+      this.#likesCount = data.likes.length;
+    } else {
+      this.#likesCount = 0;
+    }
     this.#templateSelector = templateSelector;
     this.#handleCardClick = handleCardClick;
+    this.#handleCardDelete = handleCardDelete;
+  }
+
+  getCardId() {
+    return this.#cardId;
   }
 
   #getTemplate() {
@@ -35,13 +50,22 @@ export default class Card {
     this.#likeButton = this.#card.querySelector('.place__like');
     this.#card.querySelector('.place__likes-count').textContent =
       this.#likesCount;
+    // console.log(this.#card);
+    // console.log(this.#owner);
+    if (this.#owner == myUserId) {
+      this.#deleteButton.classList.remove('place__delete_active');
+      // console.log(this.#deleteButton);
+      // console.log('1');
+    }
     this.#setEventListeners();
     return this.#card;
   }
 
   #setEventListeners() {
     this.#deleteButton.addEventListener('click', () => {
-      this.#deleteCard();
+      console.log('1');
+      this.#handleCardDelete(this);
+      // this.#deleteCard();
     });
     this.#likeButton.addEventListener('click', () => {
       this.#likeCard();
