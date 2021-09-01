@@ -13,7 +13,7 @@ export default class Card {
   #handleCardDelete;
   #cardId;
 
-  constructor(data, templateSelector, handleCardClick, handleCardDelete) {
+  constructor({ data, templateSelector, handleCardClick, handleCardDelete }) {
     this.#name = data.name;
     this.#link = data.link;
     this.#owner = data.owner._id;
@@ -63,7 +63,7 @@ export default class Card {
 
   #setEventListeners() {
     this.#deleteButton.addEventListener('click', () => {
-      console.log('1');
+      // console.log(this.#cardId);
       this.#handleCardDelete(this);
       // this.#deleteCard();
     });

@@ -30,8 +30,9 @@ export default class UserInfo {
   setUserInfo(newUserData) {
     this.#profileName.textContent = newUserData.name;
     this.#profileBio.textContent = newUserData.bio;
-    this.#profileAvatar.src = newUserData.avatar;
-    this.#id = newUserData.id;
-    console.log(this);
+    // this.#profileAvatar.src = newUserData.avatar;
+    // this.#id = newUserData.id;
+    // console.log(newUserData.id);
+    // console.log(this.#id);
   }
 }

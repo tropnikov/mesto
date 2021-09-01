@@ -32,10 +32,7 @@ export default class Api {
   saveUserData(inputData) {
     return fetch(this.#baseUrl + '/users/me', {
       method: 'PATCH',
-      headers: {
-        authorization: '3936a02f-bc3d-48a7-bceb-bcb201e7df53',
-        'Content-Type': 'application/json',
-      },
+      headers: this.#headers,
       body: JSON.stringify({
         name: inputData.name,
         about: inputData.bio,
@@ -46,10 +43,7 @@ export default class Api {
   addNewCard(cardData) {
     return fetch(this.#baseUrl + '/cards', {
       method: 'POST',
-      headers: {
-        authorization: '3936a02f-bc3d-48a7-bceb-bcb201e7df53',
-        'Content-Type': 'application/json',
-      },
+      headers: this.#headers,
       body: JSON.stringify({
         name: cardData.name,
         link: cardData.link,
@@ -60,10 +54,7 @@ export default class Api {
   deleteCard(cardId) {
     return fetch(this.#baseUrl + `/cards/${cardId}`, {
       method: 'DELETE',
-      headers: {
-        authorization: '3936a02f-bc3d-48a7-bceb-bcb201e7df53',
-        'Content-Type': 'application/json',
-      },
+      headers: this.#headers,
     }).then(this.#handleResponse);
   }
 

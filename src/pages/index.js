@@ -30,15 +30,42 @@ import Api from '../components/Api.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 export let myUserId = null;
+let cardId = null;
 // let cardId = null;
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-27',
   headers: {
-    authorization: '3936a02f-bc3d-48a7-bceb-bcb201e7df53',
+    authorization: '37580e29-ca43-4e60-bfc4-9731d6167691',
     'Content-Type': 'application/json',
   },
 });
+
+// Promise.all;
+function createCard(item) {
+  const card = new Card({
+    data: item,
+    templateSelector: cardTemplateSelector,
+    handleCardClick: (name, link) => {
+      popupFullPhoto.open(name, link);
+    },
+    handleCardDelete: (cardInstance) => {
+      deleteCard(cardInstance);
+      // console.log('opened');
+      // popupDeletePlace.open();
+      // cardId = cardInstance.getCardId();
+      // console.log(cardId);
+    },
+  });
+  return card.createCard();
+}
+
+function deleteCard(card) {
+  popupDeletePlace.open();
+  // console.log(card._id);
+  cardId = card.getCardId();
+  console.log(cardId);
+}
 
 const userInfo = new UserInfo(userDataSelectors);
 getUserDataFromServer();
@@ -88,15 +115,20 @@ function getUserDataFromServer() {
   const profileDataPromise = api.getUserData();
   profileDataPromise
     .then((result) => {
-      const serverUserData = {};
-      serverUserData.name = result.name;
-      serverUserData.bio = result.about;
-      serverUserData.avatar = result.avatar;
-      serverUserData.id = result._id;
+      // const serverUserData = {};
+      // serverUserData.name = result.name;
+      // serverUserData.bio = result.about;
+      // serverUserData.avatar = result.avatar;
+      // serverUserData.id = result._id;
       myUserId = result._id;
-      console.log(serverUserData);
+      // console.log(serverUserData);
       // document.querySelector(profileAvatarSelector).src = result.avatar;
-      userInfo.setUserInfo(serverUserData);
+      userInfo.setUserInfo({
+        name: result.name,
+        bio: result.about,
+        avatar: result.avatar,
+        id: result._id,
+      });
       // editInfoFormValidator.hideError();
     })
     .catch((err) => {
@@ -127,23 +159,6 @@ editInfoButton.addEventListener('click', () => {
 //   return card.getCardId();
 // }
 
-function createCard(item) {
-  const card = new Card(
-    item,
-    cardTemplateSelector,
-    (name, link) => {
-      popupFullPhoto.open(name, link);
-    },
-    (cardInstance) => {
-      console.log('opened');
-      popupDeletePlace.open();
-      const cardId = cardInstance.getCardId();
-      console.log(cardId);
-    }
-  );
-  return card.createCard();
-}
-
 const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
   inputData.likes = [];
   // inputData.owner._id = '';
@@ -151,7 +166,7 @@ const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
   inputData.owner = { _id: userInfo.getUserInfo().id };
   console.log(inputData.owner);
 
-  cardsList.addItem(createCard(inputData));
+  cardsList.addItem(createCard(inputData), false);
   api.addNewCard(inputData);
   popupAddPlace.close();
 });
@@ -166,7 +181,7 @@ addPlaceButton.addEventListener('click', () => {
 const popupDeletePlace = new PopupWithConfirmation(
   confirmDeletionPopupSelector,
   () => {
-    // api.deleteCard(cardId);
+    api.deleteCard(cardId);
 
     popupDeletePlace.close();
   }
