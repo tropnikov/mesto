@@ -58,5 +58,17 @@ export default class Api {
     }).then(this.#handleResponse);
   }
 
-  // другие методы работы с API
+  likeCard(cardId) {
+    return fetch(this.#baseUrl + `/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this.#headers,
+    }).then(this.#handleResponse);
+  }
+
+  dislikeCard(cardId) {
+    return fetch(this.#baseUrl + `/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this.#headers,
+    }).then(this.#handleResponse);
+  }
 }

@@ -52,12 +52,13 @@ export default class Card {
       this.#likesCount;
     // console.log(this.#card);
     // console.log(this.#owner);
-    if (this.#owner == myUserId) {
+    if (this.#owner === myUserId) {
       this.#deleteButton.classList.remove('place__delete_active');
       // console.log(this.#deleteButton);
       // console.log('1');
     }
     this.#setEventListeners();
+    // console.log(this);
     return this.#card;
   }
 
@@ -75,7 +76,7 @@ export default class Card {
     });
   }
 
-  #deleteCard() {
+  deleteCard() {
     this.#card.remove();
   }
 

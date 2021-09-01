@@ -30,7 +30,6 @@ import Api from '../components/Api.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 export let myUserId = null;
-let cardId = null;
 // let cardId = null;
 
 const api = new Api({
@@ -41,7 +40,8 @@ const api = new Api({
   },
 });
 
-// Promise.all;
+//? Promise.all;
+
 function createCard(item) {
   const card = new Card({
     data: item,
@@ -51,10 +51,6 @@ function createCard(item) {
     },
     handleCardDelete: (cardInstance) => {
       deleteCard(cardInstance);
-      // console.log('opened');
-      // popupDeletePlace.open();
-      // cardId = cardInstance.getCardId();
-      // console.log(cardId);
     },
   });
   return card.createCard();
@@ -62,9 +58,12 @@ function createCard(item) {
 
 function deleteCard(card) {
   popupDeletePlace.open();
-  // console.log(card._id);
-  cardId = card.getCardId();
-  console.log(cardId);
+  popupDeletePlace.setFormHandler(() => {
+    api.deleteCard(card.getCardId()).then(() => {
+      card.deleteCard();
+      popupDeletePlace.close();
+    });
+  });
 }
 
 const userInfo = new UserInfo(userDataSelectors);
@@ -83,46 +82,17 @@ const cardsList = new Section(
 
 cardsPromise
   .then((data) => {
-    console.log(data);
     cardsList.renderItems(data);
-    // return data;
   })
   .catch((err) => {
     console.log(err);
   });
-// cardsList.renderItems(cardsPromise);
-
-// console.log(data);
-//       return data;
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });},
-// userInfo.setUserInfo(getUserDataFromServer());
-
-// return result;
-
-// const cardsPromise = api.getInitialCards();
-// cardsPromise
-//   .then((res) => {
-//     // console.log(res);
-
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 function getUserDataFromServer() {
   const profileDataPromise = api.getUserData();
   profileDataPromise
     .then((result) => {
-      // const serverUserData = {};
-      // serverUserData.name = result.name;
-      // serverUserData.bio = result.about;
-      // serverUserData.avatar = result.avatar;
-      // serverUserData.id = result._id;
       myUserId = result._id;
-      // console.log(serverUserData);
-      // document.querySelector(profileAvatarSelector).src = result.avatar;
       userInfo.setUserInfo({
         name: result.name,
         bio: result.about,
@@ -152,22 +122,20 @@ editInfoButton.addEventListener('click', () => {
   nameInput.value = profileData.name;
   bioInput.value = profileData.bio;
   editInfoFormValidator.hideError();
-  // getUserDataFromServer();
 });
-
-// function getCardId(card) {
-//   return card.getCardId();
-// }
 
 const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
   inputData.likes = [];
-  // inputData.owner._id = '';
-
-  inputData.owner = { _id: userInfo.getUserInfo().id };
-  console.log(inputData.owner);
-
-  cardsList.addItem(createCard(inputData), false);
-  api.addNewCard(inputData);
+  inputData.owner = { _id: myUserId };
+  api
+    .addNewCard(inputData)
+    .then((result) => {
+      inputData._id = result._id;
+      cardsList.addItem(createCard(inputData), false);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   popupAddPlace.close();
 });
 
@@ -179,34 +147,10 @@ addPlaceButton.addEventListener('click', () => {
 });
 
 const popupDeletePlace = new PopupWithConfirmation(
-  confirmDeletionPopupSelector,
-  () => {
-    api.deleteCard(cardId);
-
-    popupDeletePlace.close();
-  }
+  confirmDeletionPopupSelector
 );
+
 popupDeletePlace.setEventListeners();
-// deletePlaceButton.addEventListener('click', () => {
-//   popupDeletePlace.open();
-// });
-// const popupDeleteCard = new PopupWithForm(confirmDeletionPopupSelector, () => {
-//   popupDeleteCard.close();
-// });
-// popupDeleteCard.setEventListeners();
-// function getInitialCardsFromServer() {
-
-// }
-
-// const cardsList = new Section(
-//   {
-//     items: getInitialCardsFromServer(),
-//     renderer: (item) => {
-//       cardsList.addItem(createCard(item));
-//     },
-//   },
-//   cardsContainerSelector
-// );
 
 const editInfoFormValidator = new FormValidator(
   validationConfig,
