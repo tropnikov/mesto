@@ -46,6 +46,17 @@ export default class Card {
     return cardElement;
   }
 
+  isLiked() {
+    // console.log('1');
+    console.log(this.#likes);
+    return this.#likes.some((element) => {
+      // debugger;
+      return element._id === myUserId;
+    });
+  }
+
+  setLike() {}
+
   createCard() {
     this.#card = this.#getTemplate();
     this.#placePhoto = this.#card.querySelector('.place__photo');

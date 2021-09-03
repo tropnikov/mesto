@@ -60,7 +60,15 @@ function createCard(item) {
 }
 
 function likeCard(card) {
-  console.log(card);
+  console.log(card.isLiked());
+  const checkForLike = card.isLiked()
+    ? api.dislikeCard(card.getCardId())
+    : api.likeCard(card.getCardId());
+  // console.log(api.dislikeCard(card.getCardId()));
+  checkForLike.then((result) => {
+    console.log(result);
+  });
+  // console.log(checkForLike);
   // card.likes.some((element) => {
   //   if (element._id === myUserId) {
   //     api.likeCard(card.cardId);
