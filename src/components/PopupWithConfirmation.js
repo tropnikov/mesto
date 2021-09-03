@@ -10,7 +10,6 @@ export default class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this.#popup = document.querySelector(popupSelector);
-    // this.#handleFormSubmit = handleFormSubmit;
     this.#form = this.#popup.querySelector('.form');
   }
 
@@ -28,6 +27,5 @@ export default class PopupWithConfirmation extends Popup {
 
   close() {
     super.close();
-    // this.#form.reset();
   }
 }

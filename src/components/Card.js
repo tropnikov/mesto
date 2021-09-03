@@ -50,23 +50,16 @@ export default class Card {
     this.#likeButton = this.#card.querySelector('.place__like');
     this.#card.querySelector('.place__likes-count').textContent =
       this.#likesCount;
-    // console.log(this.#card);
-    // console.log(this.#owner);
     if (this.#owner === myUserId) {
       this.#deleteButton.classList.remove('place__delete_active');
-      // console.log(this.#deleteButton);
-      // console.log('1');
     }
     this.#setEventListeners();
-    // console.log(this);
     return this.#card;
   }
 
   #setEventListeners() {
     this.#deleteButton.addEventListener('click', () => {
-      // console.log(this.#cardId);
       this.#handleCardDelete(this);
-      // this.#deleteCard();
     });
     this.#likeButton.addEventListener('click', () => {
       this.#likeCard();
