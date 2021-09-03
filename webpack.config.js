@@ -17,7 +17,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, './dist'),
     compress: true,
     port: 8080,
-    open: '/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+    open: 'c:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
   },
   module: {
     rules: [

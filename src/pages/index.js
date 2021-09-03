@@ -52,8 +52,22 @@ function createCard(item) {
     handleCardDelete: (cardInstance) => {
       deleteCard(cardInstance);
     },
+    handleCardLike: (cardInstance) => {
+      likeCard(cardInstance);
+    },
   });
   return card.createCard();
+}
+
+function likeCard(card) {
+  console.log(card);
+  // card.likes.some((element) => {
+  //   if (element._id === myUserId) {
+  //     api.likeCard(card.cardId);
+  //   } else {
+  //     api.dislikeCard(card.cardId);
+  //   }
+  // });
 }
 
 function deleteCard(card) {
@@ -83,6 +97,7 @@ const cardsList = new Section(
 cardsPromise
   .then((data) => {
     cardsList.renderItems(data);
+    console.log(data);
   })
   .catch((err) => {
     console.log(err);
@@ -93,6 +108,7 @@ function getUserDataFromServer() {
   profileDataPromise
     .then((result) => {
       myUserId = result._id;
+      console.log(myUserId);
       userInfo.setUserInfo({
         name: result.name,
         bio: result.about,
@@ -163,3 +179,5 @@ const addPlaceFormValidator = new FormValidator(
   addPlaceFormElement
 );
 addPlaceFormValidator.enableValidation();
+
+// console.log(myUserId);
