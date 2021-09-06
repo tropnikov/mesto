@@ -65,8 +65,8 @@ function likeCard(card) {
     ? api.dislikeCard(card.getCardId())
     : api.likeCard(card.getCardId());
   // console.log(api.dislikeCard(card.getCardId()));
-  checkForLike.then((result) => {
-    console.log(result);
+  checkForLike.then(() => {
+    card.setLike();
   });
   // console.log(checkForLike);
   // card.likes.some((element) => {

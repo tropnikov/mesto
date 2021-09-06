@@ -55,7 +55,9 @@ export default class Card {
     });
   }
 
-  setLike() {}
+  setLike() {
+    this.#likeButton.classList.toggle('place__like_active');
+  }
 
   createCard() {
     this.#card = this.#getTemplate();
