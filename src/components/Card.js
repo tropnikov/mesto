@@ -14,6 +14,8 @@ export default class Card {
   #cardId;
   #likes;
   #handleCardLike;
+  #liked;
+  #data;
 
   constructor({
     data,
@@ -32,6 +34,7 @@ export default class Card {
     this.#handleCardClick = handleCardClick;
     this.#handleCardDelete = handleCardDelete;
     this.#handleCardLike = handleCardLike;
+    this.#data = data;
   }
 
   getCardId() {
@@ -49,14 +52,25 @@ export default class Card {
   isLiked() {
     // console.log('1');
     console.log(this.#likes);
-    return this.#likes.some((element) => {
-      // debugger;
-      return element._id === myUserId;
-    });
+    return this.#liked;
+    // return this.#likes.some((element) => {
+    //   // debugger;
+    //   return element._id === myUserId;
+    // });
   }
 
-  setLike() {
-    this.#likeButton.classList.toggle('place__like_active');
+  setLike(data) {
+    this.#card.querySelector('.place__likes-count').textContent =
+      data.likes.length;
+    this.#liked = data.likes.some((element) => {
+      return element._id === myUserId;
+    });
+    console.log(data.likes.length);
+    if (this.#liked) {
+      this.#likeButton.classList.add('place__like_active');
+    } else {
+      this.#likeButton.classList.remove('place__like_active');
+    }
   }
 
   createCard() {
@@ -67,16 +81,17 @@ export default class Card {
     this.#card.querySelector('.place__title').innerText = this.#name;
     this.#deleteButton = this.#card.querySelector('.place__delete');
     this.#likeButton = this.#card.querySelector('.place__like');
-    this.#card.querySelector('.place__likes-count').textContent =
-      this.#likesCount;
+    this.setLike(this.#data);
+    // this.#card.querySelector('.place__likes-count').textContent =
+    //   this.#likesCount;
     if (this.#owner === myUserId) {
       this.#deleteButton.classList.remove('place__delete_active');
     }
-    this.#likes.some((element) => {
-      if (element._id === myUserId) {
-        this.#likeCard();
-      }
-    });
+    // this.#likes.some((element) => {
+    //   if (element._id === myUserId) {
+    //     this.#likeCard();
+    //   }
+    // });
     this.#setEventListeners();
     return this.#card;
   }
@@ -87,7 +102,7 @@ export default class Card {
     });
     this.#likeButton.addEventListener('click', () => {
       this.#handleCardLike(this);
-      this.#likeCard();
+      // this.#likeCard();
     });
     this.#placePhoto.addEventListener('click', () => {
       this.#handleCardClick(this.#name, this.#link);
