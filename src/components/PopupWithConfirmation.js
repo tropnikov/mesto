@@ -4,7 +4,7 @@ export default class PopupWithConfirmation extends Popup {
   #handleFormSubmit;
   #formValues;
   #inputList;
-  #popup;
+  // #popup;
   #form;
   #submitButton;
 
@@ -12,9 +12,9 @@ export default class PopupWithConfirmation extends Popup {
     super(popupSelector);
     // при записи приватных полей через hash names доступа к приватным полям снаружи класса нет, включая классы-потомки
     // https://stackoverflow.com/questions/55865403/how-to-access-the-super-classs-private-member-in-javascript
-    this.#popup = document.querySelector(popupSelector);
-    this.#form = this.#popup.querySelector('.form');
-    this.#submitButton = this.#popup.querySelector('.button_type_save');
+    // this.#popup = document.querySelector(popupSelector);
+    this.#form = this.popup.querySelector('.form');
+    this.#submitButton = this.popup.querySelector('.button_type_save');
   }
 
   setFormHandler(handler) {

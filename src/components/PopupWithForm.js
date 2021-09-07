@@ -4,17 +4,17 @@ export default class PopupWithForm extends Popup {
   #handleFormSubmit;
   #formValues;
   #inputList;
-  #popup;
+  // #popup;
   #form;
   #submitButton;
 
   constructor(popupSelector, handleFormSubmit) {
     super(popupSelector);
-    this.#popup = document.querySelector(popupSelector);
+    // this.#popup = document.querySelector(popupSelector);
     this.#handleFormSubmit = handleFormSubmit;
-    this.#form = this.#popup.querySelector('.form');
-    this.#inputList = this.#popup.querySelectorAll('.form__input');
-    this.#submitButton = this.#popup.querySelector('.button_type_save');
+    this.#form = this.popup.querySelector('.form');
+    this.#inputList = this.popup.querySelectorAll('.form__input');
+    this.#submitButton = this.popup.querySelector('.button_type_save');
   }
 
   #getInputValues() {
