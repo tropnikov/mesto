@@ -14,10 +14,7 @@ import {
   bioInput,
   nameInput,
   userDataSelectors,
-  profileAvatarSelector,
   confirmDeletionPopupSelector,
-  deletePlaceButton,
-  deletePlacePopupSelector,
   updateAvatarPopupSelector,
   updateProfileAvatarButton,
   updateAvatarFormElement,
@@ -33,7 +30,6 @@ import Api from '../components/Api.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 export let myUserId = null;
-// let cardId = null;
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-27',
@@ -43,7 +39,10 @@ const api = new Api({
   },
 });
 
-//? Promise.all;
+const userInfo = new UserInfo(userDataSelectors);
+getUserDataFromServer();
+
+const cardsPromise = api.getInitialCards();
 
 function createCard(item) {
   const card = new Card({
@@ -67,41 +66,29 @@ function likeCard(card) {
   const checkForLike = card.isLiked()
     ? api.dislikeCard(card.getCardId())
     : api.likeCard(card.getCardId());
-  // console.log(api.dislikeCard(card.getCardId()));
   checkForLike
     .then((data) => {
       card.setLike(data);
     })
     .catch((err) => console.log(err));
-  // console.log(checkForLike);
-  // card.likes.some((element) => {
-  //   if (element._id === myUserId) {
-  //     api.likeCard(card.cardId);
-  //   } else {
-  //     api.dislikeCard(card.cardId);
-  //   }
-  // });
 }
 
 function deleteCard(card) {
   popupDeletePlace.open();
   popupDeletePlace.setFormHandler(() => {
-    renderLoading(popupDeletePlace, true);
+    popupDeletePlace.renderLoading(true);
     api
       .deleteCard(card.getCardId())
       .then(() => {
         card.deleteCard();
-        popupDeletePlace.close();
       })
       .catch((err) => console.log(err))
-      .finally(() => renderLoading(popupDeletePlace, false));
+      .finally(() => {
+        popupDeletePlace.renderLoading(false);
+        popupDeletePlace.close();
+      });
   });
 }
-
-const userInfo = new UserInfo(userDataSelectors);
-getUserDataFromServer();
-
-const cardsPromise = api.getInitialCards();
 
 const cardsList = new Section(
   {
@@ -115,7 +102,6 @@ const cardsList = new Section(
 cardsPromise
   .then((data) => {
     cardsList.renderItems(data);
-    console.log(data);
   })
   .catch((err) => {
     console.log(err);
@@ -126,7 +112,6 @@ function getUserDataFromServer() {
   profileDataPromise
     .then((result) => {
       myUserId = result._id;
-      console.log(result);
       userInfo.setUserInfo({
         name: result.name,
         bio: result.about,
@@ -145,7 +130,7 @@ const popupFullPhoto = new PopupWithImage(popupFullPhotoSelector);
 popupFullPhoto.setEventListeners();
 
 const popupEditInfo = new PopupWithForm(editInfoPopupSelector, (inputData) => {
-  renderLoading(popupEditInfo, true);
+  popupEditInfo.renderLoading(true);
 
   api
     .saveUserData(inputData)
@@ -153,8 +138,10 @@ const popupEditInfo = new PopupWithForm(editInfoPopupSelector, (inputData) => {
       userInfo.setUserInfo(inputData);
     })
     .catch((err) => console.log(err))
-    .finally(() => renderLoading(popupEditInfo, false));
-  popupEditInfo.close();
+    .finally(() => {
+      popupEditInfo.renderLoading(false);
+      popupEditInfo.close();
+    });
 });
 
 popupEditInfo.setEventListeners();
@@ -167,10 +154,9 @@ editInfoButton.addEventListener('click', () => {
 });
 
 const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
-  renderLoading(popupAddPlace, true);
+  popupAddPlace.renderLoading(true);
   inputData.likes = [];
   inputData.owner = { _id: myUserId };
-  // renderLoading(popupAddPlace, true);
   api
     .addNewCard(inputData)
     .then((result) => {
@@ -180,8 +166,10 @@ const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => renderLoading(popupAddPlace, false));
-  popupAddPlace.close();
+    .finally(() => {
+      popupAddPlace.renderLoading(false);
+      popupAddPlace.close();
+    });
 });
 
 popupAddPlace.setEventListeners();
@@ -194,19 +182,19 @@ addPlaceButton.addEventListener('click', () => {
 const popupUpdateAvatar = new PopupWithForm(
   updateAvatarPopupSelector,
   (input) => {
-    console.log(api.updateAvatar(input));
+    popupUpdateAvatar.renderLoading(true);
     api
       .updateAvatar(input)
       .then((result) => {
-        console.log(result);
         userInfo.setAvatar(result);
-        // inputData._id = result._id;
-        // cardsList.addItem(createCard(inputData), false);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        popupUpdateAvatar.renderLoading(false);
+        popupUpdateAvatar.close();
       });
-    popupUpdateAvatar.close();
   }
 );
 popupUpdateAvatar.setEventListeners();
@@ -238,7 +226,3 @@ const addPlaceFormValidator = new FormValidator(
   addPlaceFormElement
 );
 addPlaceFormValidator.enableValidation();
-
-function renderLoading(popup, isLoading) {
-  popup.renderLoading(isLoading);
-}

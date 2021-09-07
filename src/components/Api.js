@@ -1,4 +1,3 @@
-// import { nameInput, bioInput } from '../utils/constants.js';
 
 export default class Api {
   #baseUrl;
@@ -73,7 +72,6 @@ export default class Api {
   }
 
   updateAvatar(inputLink) {
-    console.log(inputLink);
     return fetch(this.#baseUrl + `/users/me/avatar`, {
       method: 'PATCH',
       headers: this.#headers,

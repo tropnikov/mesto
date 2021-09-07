@@ -50,13 +50,7 @@ export default class Card {
   }
 
   isLiked() {
-    // console.log('1');
-    console.log(this.#likes);
     return this.#liked;
-    // return this.#likes.some((element) => {
-    //   // debugger;
-    //   return element._id === myUserId;
-    // });
   }
 
   setLike(data) {
@@ -65,7 +59,6 @@ export default class Card {
     this.#liked = data.likes.some((element) => {
       return element._id === myUserId;
     });
-    console.log(data.likes.length);
     if (this.#liked) {
       this.#likeButton.classList.add('place__like_active');
     } else {
@@ -82,16 +75,10 @@ export default class Card {
     this.#deleteButton = this.#card.querySelector('.place__delete');
     this.#likeButton = this.#card.querySelector('.place__like');
     this.setLike(this.#data);
-    // this.#card.querySelector('.place__likes-count').textContent =
-    //   this.#likesCount;
     if (this.#owner === myUserId) {
       this.#deleteButton.classList.remove('place__delete_active');
     }
-    // this.#likes.some((element) => {
-    //   if (element._id === myUserId) {
-    //     this.#likeCard();
-    //   }
-    // });
+
     this.#setEventListeners();
     return this.#card;
   }
@@ -102,7 +89,6 @@ export default class Card {
     });
     this.#likeButton.addEventListener('click', () => {
       this.#handleCardLike(this);
-      // this.#likeCard();
     });
     this.#placePhoto.addEventListener('click', () => {
       this.#handleCardClick(this.#name, this.#link);
