@@ -58,3 +58,9 @@ export const userDataSelectors = {
 };
 export const deletePlaceButton = document.querySelector('.button_type_delete');
 export const deletePlacePopupSelector = '.place__delete';
+export const updateAvatarPopupSelector = '.avatar-update';
+export const updateProfileAvatarButton =
+  document.querySelector('.profile__avatar');
+export const updateAvatarFormElement = document.querySelector(
+  '.avatar-update__form'
+);

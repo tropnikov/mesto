@@ -18,6 +18,9 @@ import {
   confirmDeletionPopupSelector,
   deletePlaceButton,
   deletePlacePopupSelector,
+  updateAvatarPopupSelector,
+  updateProfileAvatarButton,
+  updateAvatarFormElement,
 } from '../utils/constants.js';
 
 import FormValidator from '../components/FormValidator.js';
@@ -118,10 +121,10 @@ function getUserDataFromServer() {
   profileDataPromise
     .then((result) => {
       myUserId = result._id;
-      console.log(myUserId);
+      console.log(result);
       userInfo.setUserInfo({
         name: result.name,
-        bio: result.about,
+        about: result.about,
         avatar: result.avatar,
         id: result._id,
       });
@@ -172,11 +175,41 @@ addPlaceButton.addEventListener('click', () => {
   addPlaceFormValidator.hideError();
 });
 
+const popupUpdateAvatar = new PopupWithForm(
+  updateAvatarPopupSelector,
+  (input) => {
+    console.log(api.updateAvatar(input));
+    api
+      .updateAvatar(input)
+      .then((result) => {
+        console.log(result);
+        userInfo.setUserInfo(result);
+        // inputData._id = result._id;
+        // cardsList.addItem(createCard(inputData), false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    popupUpdateAvatar.close();
+  }
+);
+popupUpdateAvatar.setEventListeners();
+
+updateProfileAvatarButton.addEventListener('click', () => {
+  popupUpdateAvatar.open();
+});
+
 const popupDeletePlace = new PopupWithConfirmation(
   confirmDeletionPopupSelector
 );
 
 popupDeletePlace.setEventListeners();
+
+const updateAvatarFormValidator = new FormValidator(
+  validationConfig,
+  updateAvatarFormElement
+);
+updateAvatarFormValidator.enableValidation();
 
 const editInfoFormValidator = new FormValidator(
   validationConfig,

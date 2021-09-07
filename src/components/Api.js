@@ -71,4 +71,13 @@ export default class Api {
       headers: this.#headers,
     }).then(this.#handleResponse);
   }
+
+  updateAvatar(inputLink) {
+    console.log(inputLink);
+    return fetch(this.#baseUrl + `/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this.#headers,
+      body: JSON.stringify(inputLink),
+    }).then(this.#handleResponse);
+  }
 }

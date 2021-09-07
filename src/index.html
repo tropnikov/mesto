@@ -210,6 +210,53 @@
       </div>
     </div>
 
+    <!-- попап обновления аватара -->
+    <div class="popup avatar-update">
+      <div class="popup__container">
+        <button
+          class="
+            popup__close
+            button button_type_close
+            avatar-update__close-button
+            hover
+          "
+          type="button"
+          aria-label="Закрыть попап"
+        ></button>
+
+        <h2 class="popup__title">Обновить аватар</h2>
+
+        <form
+          action="#"
+          class="form popup__form avatar-update__form"
+          name="avatar-update-form"
+          novalidate
+        >
+          <input
+            id="avatar-update-input"
+            type="url"
+            name="avatar"
+            class="form__input"
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <span class="avatar-update-input-error form__input-error"></span>
+          <button
+            type="submit"
+            class="
+              popup__save
+              button
+              form__submit
+              button_type_save button_disabled
+            "
+            disabled
+          >
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+
     <template class="card-template">
       <li class="place">
         <img class="place__photo" src="#" alt="Фотография места" />
