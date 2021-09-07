@@ -86,10 +86,15 @@ function likeCard(card) {
 function deleteCard(card) {
   popupDeletePlace.open();
   popupDeletePlace.setFormHandler(() => {
-    api.deleteCard(card.getCardId()).then(() => {
-      card.deleteCard();
-      popupDeletePlace.close();
-    });
+    renderLoading(popupDeletePlace, true);
+    api
+      .deleteCard(card.getCardId())
+      .then(() => {
+        card.deleteCard();
+        popupDeletePlace.close();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => renderLoading(popupDeletePlace, false));
   });
 }
 
@@ -140,8 +145,15 @@ const popupFullPhoto = new PopupWithImage(popupFullPhotoSelector);
 popupFullPhoto.setEventListeners();
 
 const popupEditInfo = new PopupWithForm(editInfoPopupSelector, (inputData) => {
-  userInfo.setUserInfo(inputData);
-  api.saveUserData(inputData);
+  renderLoading(popupEditInfo, true);
+
+  api
+    .saveUserData(inputData)
+    .then(() => {
+      userInfo.setUserInfo(inputData);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(popupEditInfo, false));
   popupEditInfo.close();
 });
 
@@ -155,8 +167,10 @@ editInfoButton.addEventListener('click', () => {
 });
 
 const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
+  renderLoading(popupAddPlace, true);
   inputData.likes = [];
   inputData.owner = { _id: myUserId };
+  // renderLoading(popupAddPlace, true);
   api
     .addNewCard(inputData)
     .then((result) => {
@@ -165,7 +179,8 @@ const popupAddPlace = new PopupWithForm(addPlacePopupSelector, (inputData) => {
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => renderLoading(popupAddPlace, false));
   popupAddPlace.close();
 });
 
@@ -224,4 +239,6 @@ const addPlaceFormValidator = new FormValidator(
 );
 addPlaceFormValidator.enableValidation();
 
-// console.log(myUserId);
+function renderLoading(popup, isLoading) {
+  popup.renderLoading(isLoading);
+}

@@ -6,11 +6,13 @@ export default class PopupWithConfirmation extends Popup {
   #inputList;
   #popup;
   #form;
+  #submitButton;
 
   constructor(popupSelector) {
     super(popupSelector);
     this.#popup = document.querySelector(popupSelector);
     this.#form = this.#popup.querySelector('.form');
+    this.#submitButton = this.#popup.querySelector('.button_type_save');
   }
 
   setFormHandler(handler) {
@@ -27,5 +29,13 @@ export default class PopupWithConfirmation extends Popup {
 
   close() {
     super.close();
+  }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this.#submitButton.textContent = 'Удаление...';
+    } else {
+      this.#submitButton.textContent = 'Да';
+    }
   }
 }
