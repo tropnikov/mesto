@@ -39,27 +39,29 @@ const api = new Api({
   },
 });
 
+function getUserDataFromServer() {
+  const profileDataPromise = api.getUserData();
+  profileDataPromise
+    .then((result) => {
+      myUserId = result._id;
+      userInfo.setUserInfo({
+        name: result.name,
+        bio: result.about,
+        // avatar: result.avatar,
+        id: result._id,
+      });
+      userInfo.setAvatar(result);
+      // editInfoFormValidator.hideError();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 const userInfo = new UserInfo(userDataSelectors);
 getUserDataFromServer();
 
 const cardsPromise = api.getInitialCards();
-
-function createCard(item) {
-  const card = new Card({
-    data: item,
-    templateSelector: cardTemplateSelector,
-    handleCardClick: (name, link) => {
-      popupFullPhoto.open(name, link);
-    },
-    handleCardDelete: (cardInstance) => {
-      deleteCard(cardInstance);
-    },
-    handleCardLike: (cardInstance) => {
-      likeCard(cardInstance);
-    },
-  });
-  return card.createCard();
-}
 
 function likeCard(card) {
   console.log(card.isLiked());
@@ -90,6 +92,23 @@ function deleteCard(card) {
   });
 }
 
+function createCard(item) {
+  const card = new Card({
+    data: item,
+    templateSelector: cardTemplateSelector,
+    handleCardClick: (name, link) => {
+      popupFullPhoto.open(name, link);
+    },
+    handleCardDelete: (cardInstance) => {
+      deleteCard(cardInstance);
+    },
+    handleCardLike: (cardInstance) => {
+      likeCard(cardInstance);
+    },
+  });
+  return card.createCard();
+}
+
 const cardsList = new Section(
   {
     renderer: (item) => {
@@ -106,25 +125,6 @@ cardsPromise
   .catch((err) => {
     console.log(err);
   });
-
-function getUserDataFromServer() {
-  const profileDataPromise = api.getUserData();
-  profileDataPromise
-    .then((result) => {
-      myUserId = result._id;
-      userInfo.setUserInfo({
-        name: result.name,
-        bio: result.about,
-        // avatar: result.avatar,
-        id: result._id,
-      });
-      userInfo.setAvatar(result);
-      // editInfoFormValidator.hideError();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
 
 const popupFullPhoto = new PopupWithImage(popupFullPhotoSelector);
 popupFullPhoto.setEventListeners();
@@ -197,8 +197,8 @@ const popupUpdateAvatar = new PopupWithForm(
       });
   }
 );
-popupUpdateAvatar.setEventListeners();
 
+popupUpdateAvatar.setEventListeners();
 updateProfileAvatarButton.addEventListener('click', () => {
   popupUpdateAvatar.open();
 });
@@ -206,7 +206,6 @@ updateProfileAvatarButton.addEventListener('click', () => {
 const popupDeletePlace = new PopupWithConfirmation(
   confirmDeletionPopupSelector
 );
-
 popupDeletePlace.setEventListeners();
 
 const updateAvatarFormValidator = new FormValidator(
