@@ -124,10 +124,11 @@ function getUserDataFromServer() {
       console.log(result);
       userInfo.setUserInfo({
         name: result.name,
-        about: result.about,
-        avatar: result.avatar,
+        bio: result.about,
+        // avatar: result.avatar,
         id: result._id,
       });
+      userInfo.setAvatar(result);
       // editInfoFormValidator.hideError();
     })
     .catch((err) => {
@@ -183,7 +184,7 @@ const popupUpdateAvatar = new PopupWithForm(
       .updateAvatar(input)
       .then((result) => {
         console.log(result);
-        userInfo.setUserInfo(result);
+        userInfo.setAvatar(result);
         // inputData._id = result._id;
         // cardsList.addItem(createCard(inputData), false);
       })

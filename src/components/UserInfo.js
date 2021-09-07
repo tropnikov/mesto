@@ -22,19 +22,23 @@ export default class UserInfo {
     return {
       name: this.#profileName.textContent,
       bio: this.#profileBio.textContent,
-      avatar: this.#avatar,
-      id: this.#id,
+      avatar: this.#profileAvatar.style.backgroundImage,
+      // id: this.#id,
     };
   }
 
   setUserInfo(newUserData) {
     this.#profileName.textContent = newUserData.name;
-    this.#profileBio.textContent = newUserData.about;
-    this.#profileAvatar.style.backgroundImage =
-      'url(' + `${newUserData.avatar}` + ')';
+    this.#profileBio.textContent = newUserData.bio;
+
     console.log(newUserData.avatar);
     // this.#id = newUserData.id;
     // console.log(newUserData.id);
     // console.log(this.#id);
+  }
+
+  setAvatar(data) {
+    this.#profileAvatar.style.backgroundImage = 'url(' + `${data.avatar}` + ')';
+    console.log(data.avatar);
   }
 }
