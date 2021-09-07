@@ -10,7 +10,9 @@
   background-color: transparent;
 }
 
-.place__like:hover {
-  opacity: 0.5;
-  cursor: pointer;
+@media (hover: hover) and (pointer: fine) {
+  .place__like:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
 }
