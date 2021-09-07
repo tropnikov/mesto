@@ -64,7 +64,6 @@ getUserDataFromServer();
 const cardsPromise = api.getInitialCards();
 
 function likeCard(card) {
-  console.log(card.isLiked());
   const checkForLike = card.isLiked()
     ? api.dislikeCard(card.getCardId())
     : api.likeCard(card.getCardId());
