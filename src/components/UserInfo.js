@@ -20,17 +20,24 @@ export default class UserInfo {
   getUserInfo() {
     return {
       name: this.#profileName.textContent,
-      bio: this.#profileBio.textContent,
-      avatar: this.#profileAvatar.style.backgroundImage,
+      about: this.#profileBio.textContent,
+      // avatar: this.#profileAvatar.style.backgroundImage,
     };
   }
 
   setUserInfo(newUserData) {
-    this.#profileName.textContent = newUserData.name;
-    this.#profileBio.textContent = newUserData.bio;
+    if (newUserData.name) {
+      this.#profileName.textContent = newUserData.name;
+    }
+    if (newUserData.about) {
+      this.#profileBio.textContent = newUserData.about;
+    }
   }
 
   setAvatar(data) {
-    this.#profileAvatar.style.backgroundImage = 'url(' + `${data.avatar}` + ')';
+    if (data.avatar) {
+      this.#profileAvatar.style.backgroundImage =
+        'url(' + `${data.avatar}` + ')';
+    }
   }
 }

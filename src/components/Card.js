@@ -1,4 +1,4 @@
-import { myUserId } from '../pages/index.js';
+// import { myUserId } from '../pages/index.js';
 export default class Card {
   #name;
   #link;
@@ -8,14 +8,14 @@ export default class Card {
   #likeButton;
   #placePhoto;
   #handleCardClick;
-  #likesCount;
   #owner;
   #handleCardDelete;
   #cardId;
-  #likes;
   #handleCardLike;
   #liked;
   #data;
+  #myUserId;
+  #likes;
 
   constructor({
     data,
@@ -23,18 +23,20 @@ export default class Card {
     handleCardClick,
     handleCardDelete,
     handleCardLike,
+    myUserId,
   }) {
     this.#name = data.name;
     this.#link = data.link;
     this.#owner = data.owner._id;
     this.#cardId = data._id;
-    this.#likes = data.likes;
-    this.#likesCount = data.likes.length;
+    // this.#likes = data.likes;
+    // this.#likesCount = data.likes.length;
     this.#templateSelector = templateSelector;
     this.#handleCardClick = handleCardClick;
     this.#handleCardDelete = handleCardDelete;
     this.#handleCardLike = handleCardLike;
     this.#data = data;
+    this.#myUserId = myUserId;
   }
 
   getCardId() {
@@ -57,7 +59,7 @@ export default class Card {
     this.#card.querySelector('.place__likes-count').textContent =
       data.likes.length;
     this.#liked = data.likes.some((element) => {
-      return element._id === myUserId;
+      return element._id === this.#myUserId;
     });
     if (this.#liked) {
       this.#likeButton.classList.add('place__like_active');
@@ -75,10 +77,9 @@ export default class Card {
     this.#deleteButton = this.#card.querySelector('.place__delete');
     this.#likeButton = this.#card.querySelector('.place__like');
     this.setLike(this.#data);
-    if (this.#owner === myUserId) {
+    if (this.#owner === this.#myUserId) {
       this.#deleteButton.classList.remove('place__delete_active');
     }
-
     this.#setEventListeners();
     return this.#card;
   }
@@ -97,9 +98,5 @@ export default class Card {
 
   deleteCard() {
     this.#card.remove();
-  }
-
-  #likeCard() {
-    this.#likeButton.classList.toggle('place__like_active');
   }
 }

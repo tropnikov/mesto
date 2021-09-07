@@ -1,4 +1,3 @@
-
 export default class Api {
   #baseUrl;
   #headers;
@@ -32,10 +31,7 @@ export default class Api {
     return fetch(this.#baseUrl + '/users/me', {
       method: 'PATCH',
       headers: this.#headers,
-      body: JSON.stringify({
-        name: inputData.name,
-        about: inputData.bio,
-      }),
+      body: JSON.stringify(inputData),
     }).then(this.#handleResponse);
   }
 
@@ -43,10 +39,7 @@ export default class Api {
     return fetch(this.#baseUrl + '/cards', {
       method: 'POST',
       headers: this.#headers,
-      body: JSON.stringify({
-        name: cardData.name,
-        link: cardData.link,
-      }),
+      body: JSON.stringify(cardData),
     }).then(this.#handleResponse);
   }
 

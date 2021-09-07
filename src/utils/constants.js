@@ -12,7 +12,7 @@ export const editInfoFormElement = document.querySelector(
   '.profile-edit__form'
 );
 export const nameInput = editInfoFormElement.querySelector("[name='name']");
-export const bioInput = editInfoFormElement.querySelector("[name='bio']");
+export const bioInput = editInfoFormElement.querySelector("[name='about']");
 export const addPlaceButton = document.querySelector('.button_type_add');
 export const addPlaceFormElement = document.querySelector('.place-add__form');
 export const addPlacePopupSelector = '.place-add';
@@ -37,3 +37,5 @@ export const updateProfileAvatarButton =
 export const updateAvatarFormElement = document.querySelector(
   '.avatar-update__form'
 );
+export const serverUrl = 'https://mesto.nomoreparties.co/v1/cohort-27';
+export const token = '37580e29-ca43-4e60-bfc4-9731d6167691';
