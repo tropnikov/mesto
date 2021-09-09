@@ -49,6 +49,6 @@
     
         npm run dev
 
-Enjoy!
+Гифка с демонстрацией работы:
 
-<img align="center" src="mesto_screen.jpg" alt="drawing" width="400"/>  
+<img src="mesto.gif" alt="demo of project" width="600"/>  
