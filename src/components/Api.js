@@ -8,11 +8,9 @@ export default class Api {
   }
 
   #handleResponse = (response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
+    return response.ok
+      ? response.json()
+      : Promise.reject(`Ошибка: ${response.status}`);
   };
 
   getInitialCards() {

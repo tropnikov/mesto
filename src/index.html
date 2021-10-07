@@ -12,16 +12,16 @@
 
   <body class="page">
     <div class="page__container">
-      <header class="header page__header">
+      <header class="header page__section">
         <img
-          class="header__logo"
+          class="logo header__logo"
           src="<%=require('./images/logo.svg')%>"
           alt="Логотип Проекта Место"
         />
       </header>
 
       <main class="content page__content">
-        <section class="profile section content__section">
+        <section class="profile page__section">
           <div class="profile__avatar"></div>
 
           <div class="profile__info">
@@ -41,12 +41,12 @@
           ></button>
         </section>
 
-        <section class="photos section content__section">
-          <ul class="places"></ul>
+        <section class="places page__section">
+          <ul class="places__list"></ul>
         </section>
       </main>
 
-      <footer class="footer section page__footer">
+      <footer class="footer page__section">
         <p class="footer__copyright">&copy; 2021 Максим Тропников</p>
       </footer>
     </div>
@@ -265,7 +265,7 @@
           class="place__delete place__delete_active button_type_delete hover"
         ></button>
         <div class="place__info">
-          <h3 class="place__title">Карачаевск</h3>
+          <h3 class="place__title"></h3>
           <div class="place__likes-container">
             <button class="place__like" type="button"></button>
             <p class="place__likes-count"></p>

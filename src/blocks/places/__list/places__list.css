@@ -1,4 +1,4 @@
-.places {
+.places__list {
   margin: 0;
   padding: 50px 0 66px;
   display: grid;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .places {
+  .places__list {
     grid-template-rows: repeat(auto-fit, 1fr);
     grid-template-columns: repeat(2, 1fr);
     padding: 36px 0 48px;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (max-width: 568px) {
-  .places {
+  .places__list {
     grid-template-columns: 1fr;
   }
 }
