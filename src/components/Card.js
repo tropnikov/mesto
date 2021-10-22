@@ -78,7 +78,7 @@ export default class Card {
     this.#likeButton = this.#card.querySelector('.place__like');
     this.setLike(this.#data);
     if (this.#owner === this.#myUserId) {
-      this.#deleteButton.classList.remove('place__delete_active');
+      this.#deleteButton.classList.remove('place__delete_inactive');
     }
     this.#setEventListeners();
     return this.#card;
